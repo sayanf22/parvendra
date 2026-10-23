@@ -17,7 +17,7 @@ type Shape = "pill" | "circle";
 
 const shared =
   "group/btn relative inline-flex shrink-0 items-center justify-center overflow-hidden " +
-  "font-semibold leading-none whitespace-nowrap " +
+  "font-semibold leading-none " +
   "transition-[background-color,color,border-color,box-shadow,transform] duration-300 " +
   "ease-[var(--ease-out-soft)] hover:-translate-y-0.5 active:translate-y-0 " +
   "disabled:pointer-events-none disabled:opacity-55";
@@ -45,13 +45,17 @@ export function whatsappClass({
   tone = "solid",
   size = "lg",
   shape = "pill",
+  wrap = false,
 }: {
   tone?: Tone;
   size?: Size;
   shape?: Shape;
+  /** Let the label wrap inside the pill instead of clipping it on narrow screens. */
+  wrap?: boolean;
 } = {}) {
   return cn(
     shared,
+    wrap ? "whitespace-normal text-center" : "whitespace-nowrap",
     tones[tone],
     shape === "circle" ? circleSizes[size] : pillSizes[size]
   );
@@ -102,7 +106,7 @@ export function WhatsAppSubmitButton({
   children,
 }: ButtonProps) {
   return (
-    <button type="submit" className={cn(whatsappClass({ tone, size }), className)}>
+    <button type="submit" className={cn(whatsappClass({ tone, size, wrap: true }), className)}>
       <Inner>{children}</Inner>
     </button>
   );

@@ -35,7 +35,7 @@ export function FeatureCard({
         <Icon className="size-[1.4rem]" />
       </span>
 
-      <h3 className="mt-6 text-[1.0625rem] font-semibold leading-snug tracking-[-0.012em] text-navy">
+      <h3 className="mt-6 font-sans text-[1.0625rem] font-semibold leading-snug tracking-[-0.012em] text-navy">
         {title}
       </h3>
 

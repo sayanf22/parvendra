@@ -58,7 +58,7 @@ export function ProductCard({
 
         {/* ── Meta ──────────────────────────────────────────────────── */}
         <div className="flex flex-1 flex-col items-center px-[clamp(0.75rem,1.5vw,1.25rem)] py-[clamp(0.8125rem,1.5vw,1.125rem)] text-center">
-          <h3 className="text-[0.875rem] font-semibold leading-snug tracking-[-0.01em] text-navy sm:text-[0.9375rem]">
+          <h3 className="font-sans text-[0.875rem] font-semibold leading-snug tracking-[-0.01em] text-navy sm:text-[0.9375rem]">
             {product.name}
           </h3>
           <p className="mt-1 text-[0.6875rem] leading-snug text-muted sm:text-[0.75rem]">

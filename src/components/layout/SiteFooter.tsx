@@ -96,9 +96,12 @@ export function SiteFooter() {
       </div>
 
       <Container>
-        <div className="flex flex-col items-center gap-4 py-[clamp(1.5rem,3vw,2.25rem)]">
+        <div className="flex flex-col items-center justify-between gap-2 py-[clamp(1.5rem,3vw,2.25rem)] sm:flex-row">
           <p className="text-center text-[0.75rem] text-muted-soft">
             © {new Date().getFullYear()} {site.name}. All rights reserved.
+          </p>
+          <p className="text-center text-[0.75rem] text-muted-soft">
+            Made by <span className="font-semibold text-navy">Whycreatives</span>
           </p>
         </div>
       </Container>

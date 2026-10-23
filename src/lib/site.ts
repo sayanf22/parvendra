@@ -37,12 +37,27 @@ export const navLinks: NavLink[] = [
   { label: "Contact", href: "/contact" },
 ];
 
-/** Words that scroll across the home page band. Plain text only, no logos. */
+/**
+ * Short words for the two home page marquee rows. Every word names something in
+ * the catalogue (a type of piece, a finish or a collection), so the band makes
+ * no claim beyond the products themselves.
+ */
 export const marqueeItems = [
-  "Golden Figurines",
-  "Gold & Silver Finishes",
-  "Vases & Flower Stands",
-  "Silver Serving Trays",
-  "Prices in Indian Rupees",
-  "Enquire on WhatsApp",
+  "Figurines",
+  "Vases",
+  "Flower Stands",
+  "Serving Trays",
+  "Leopard",
+  "Rabbit",
+  "Deer",
+  "Sunburst",
+] as const;
+
+export const marqueeItemsAlt = [
+  "Gold",
+  "Silver",
+  "Home Décor",
+  "Tableware",
+  "Statement Pieces",
+  "Accents",
 ] as const;

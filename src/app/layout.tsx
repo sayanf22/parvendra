@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Newsreader } from "next/font/google";
+import { DM_Sans, DM_Serif_Display, Mrs_Saint_Delafield } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -7,18 +7,30 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { organizationSchema, websiteSchema } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-/** UI + body copy. Clean modern grotesque, variable weight. */
-const geist = Geist({
-  variable: "--font-geist",
+/** UI + body copy. Clean geometric sans, variable weight. */
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
   display: "swap",
 });
 
-/** Display type. Editorial serif for headings. */
-const newsreader = Newsreader({
-  variable: "--font-newsreader",
-  subsets: ["latin"],
+/**
+ * Display type. Tight, high-contrast serif for headings. It ships one weight
+ * (400), so headings that need a bolder look use the sans instead of a faux bold.
+ */
+const dmSerif = DM_Serif_Display({
+  variable: "--font-dm-serif",
+  weight: "400",
   style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
+/** Thin script, used only for short decorative accents such as the hero eyebrow. */
+const script = Mrs_Saint_Delafield({
+  variable: "--font-script-face",
+  weight: "400",
+  subsets: ["latin"],
   display: "swap",
 });
 
@@ -90,7 +102,7 @@ export default function RootLayout({
       lang="en-IN"
       /* Tells Next the smooth scroll is intentional, silencing its warning. */
       data-scroll-behavior="smooth"
-      className={`${geist.variable} ${newsreader.variable} h-full antialiased`}
+      className={`${dmSans.variable} ${dmSerif.variable} ${script.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-white">
         {/* Entity graph, once for the whole site. */}

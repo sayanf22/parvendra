@@ -60,8 +60,9 @@
   --color-tint-ocean: #f1ece7;
 
   /* Typography — editorial serif for display, grotesque for UI */
-  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-newsreader), ui-serif, Georgia, serif;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-dm-serif), ui-serif, Georgia, serif;
+  --font-script: var(--font-script-face), cursive;
 
   /* Fluid type scale */
   --text-eyebrow: clamp(0.625rem, 0.595rem + 0.15vw, 0.75rem);
@@ -494,6 +495,156 @@
   animation: bb-float 9s ease-in-out infinite;
 }
 
+/* ── Hero choreography ─────────────────────────────────────────────────
+   Only `transform`, `opacity` and `clip-path` animate. Tailwind v4 puts
+   translate/scale utilities on their own CSS properties, so these keyframes
+   never fight a utility such as `-translate-x-1/2`. Each element sets its
+   start time through `--d`. */
+@keyframes bb-word-up {
+  from {
+    transform: translate3d(0, 108%, 0) rotate(4deg);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes bb-write {
+  from {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0.2;
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+@keyframes bb-draw-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes bb-draw-y {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes bb-frame-in {
+  from {
+    clip-path: inset(100% 0 0 0 round 1.25rem);
+  }
+  to {
+    clip-path: inset(0 0 0 0 round 1.25rem);
+  }
+}
+
+@keyframes bb-zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(1.18);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes bb-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  60% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes bb-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -6px, 0);
+  }
+}
+
+/* Mask that each headline word rises out of. The padding keeps descenders
+   and the underline inside the clip; the negative margin cancels it. */
+.hero-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+.hero-word-inner {
+  display: inline-block;
+  transform-origin: 0 100%;
+  animation: bb-word-up 1s var(--ease-out-soft) both;
+  animation-delay: var(--d, 0ms);
+}
+
+.hero-write {
+  animation: bb-write 1.6s var(--ease-in-out-soft) both;
+  animation-delay: var(--d, 0ms);
+}
+
+.hero-underline {
+  transform-origin: 0 50%;
+  animation: bb-draw-x 0.9s var(--ease-out-soft) both;
+  animation-delay: var(--d, 0ms);
+}
+
+.hero-rule-x {
+  transform-origin: 0 50%;
+  animation: bb-draw-x 1.4s var(--ease-in-out-soft) both;
+  animation-delay: var(--d, 0ms);
+}
+
+.hero-rule-y {
+  transform-origin: 50% 0;
+  animation: bb-draw-y 1.4s var(--ease-in-out-soft) both;
+  animation-delay: var(--d, 0ms);
+}
+
+.hero-frame {
+  animation: bb-frame-in 1.2s var(--ease-in-out-soft) both;
+  animation-delay: var(--d, 0ms);
+}
+
+.hero-zoom {
+  animation: bb-zoom-in 1.6s var(--ease-out-soft) both;
+  animation-delay: var(--d, 0ms);
+}
+
+/* Pops in, then drifts gently so the composition never looks frozen. */
+.hero-pop {
+  animation:
+    bb-pop 0.7s var(--ease-out-soft) both,
+    bb-drift 6s ease-in-out calc(var(--d, 0ms) + 900ms) infinite;
+  animation-delay: var(--d, 0ms), calc(var(--d, 0ms) + 900ms);
+}
+
+/* Second marquee row runs the opposite way. */
+.marquee-track.marquee-reverse {
+  animation-direction: reverse;
+}
+
 .marquee-track {
   display: flex;
   width: max-content;
@@ -551,6 +702,20 @@
   .reveal {
     opacity: 1;
     transform: none;
+  }
+
+  /* No staggered waits either: everything is in its final state at once. */
+  .hero-item,
+  .hero-art,
+  .hero-word-inner,
+  .hero-write,
+  .hero-underline,
+  .hero-rule-x,
+  .hero-rule-y,
+  .hero-frame,
+  .hero-zoom,
+  .hero-pop {
+    animation-delay: 0ms !important;
   }
 
   /* Static, wrapped grid instead of a loop — and drop the duplicate copy. */

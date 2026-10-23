@@ -1,52 +1,94 @@
 import type { CSSProperties } from "react";
-import { marqueeItems } from "@/lib/site";
+import { Reveal } from "@/components/ui/Reveal";
+import { marqueeItems, marqueeItemsAlt } from "@/lib/site";
+import { categories, products } from "@/lib/products";
+
+const words = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
+const say = (n: number) => words[n] ?? String(n);
 
 /**
- * Full-bleed band that scrolls the collection highlights as plain text. It
- * replaces the old client-logo marquee, so the page carries no third-party
- * logos or images.
+ * Full-bleed band with a short counted headline and two plain-text marquee rows
+ * running in opposite directions. The counts come from the catalogue, so they
+ * stay correct when products change.
  */
 export function ClientStrip() {
-  const track = [...marqueeItems, ...marqueeItems];
+  const pieceCount = products.length;
+  const finishCount = new Set(products.map((p) => p.finish)).size;
+  const collectionCount = categories.filter((c) => c.id !== "all").length;
+
+  const rowA = [...marqueeItems, ...marqueeItems];
+  const rowB = [...marqueeItemsAlt, ...marqueeItemsAlt];
 
   return (
     <section
       aria-labelledby="collection-heading"
-      className="relative isolate overflow-hidden rounded-[clamp(1.5rem,4vw,3rem)] bg-lime-soft py-[clamp(3.5rem,8vw,6rem)]"
+      className="relative isolate mt-[clamp(1.5rem,4vw,3rem)] overflow-hidden rounded-[clamp(1.5rem,4vw,3rem)] bg-lime-soft py-[clamp(3.5rem,8vw,6rem)]"
     >
-      <div className="mx-auto max-w-[82.5rem] px-[clamp(1.25rem,4vw,3rem)] text-center">
-        <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.16em] text-navy/75 sm:text-[0.8125rem]">
+      <Reveal className="mx-auto max-w-[82.5rem] px-[clamp(1.25rem,4vw,3rem)] text-center">
+        <span className="inline-flex items-center rounded-pill border border-navy/40 px-4 py-1.5 text-[0.75rem] font-medium text-navy sm:text-[0.8125rem]">
           The collection
-        </p>
+        </span>
 
         <h2
           id="collection-heading"
-          className="mx-auto mt-3 max-w-[30ch] font-display text-[1.5rem] font-normal leading-[1.2] text-navy sm:mt-4 sm:text-[2rem] lg:text-[2.5rem]"
+          className="mx-auto mt-5 font-display text-[clamp(1.875rem,1.2rem+3vw,3.75rem)] leading-[1.05] tracking-[-0.02em] text-navy"
         >
-          Figurines, vases and serving trays in gold and silver
+          {say(pieceCount)} pieces. {say(finishCount)} finishes.
+          <br />
+          <em className="text-blue">{say(collectionCount)} collections.</em>
         </h2>
-      </div>
+      </Reveal>
 
-      <div className="edge-fade mt-[clamp(2.5rem,6vw,4.5rem)] overflow-hidden">
+      <div className="edge-fade mt-[clamp(2.5rem,6vw,4rem)] overflow-hidden">
         <ul
           className="marquee-track items-center"
           style={
             {
-              "--marquee-duration": "60s",
-              "--marquee-duration-sm": "38s",
+              "--marquee-duration": "48s",
+              "--marquee-duration-sm": "30s",
             } as CSSProperties
           }
         >
-          {track.map((item, index) => (
+          {rowA.map((item, index) => (
             <li
-              key={`${item}-${index}`}
+              key={`a-${item}-${index}`}
               aria-hidden={index >= marqueeItems.length}
-              className="flex shrink-0 items-center gap-[clamp(1.5rem,4vw,3.5rem)] px-[clamp(0.75rem,2vw,1.75rem)]"
+              className="flex shrink-0 items-center gap-[clamp(1.25rem,3vw,2.75rem)] px-[clamp(0.625rem,1.5vw,1.375rem)]"
             >
-              <span className="whitespace-nowrap font-display text-[1.25rem] leading-none text-navy/85 sm:text-[1.875rem] lg:text-[2.375rem]">
+              <span
+                className={
+                  index % 2 === 0
+                    ? "whitespace-nowrap font-display text-[1.75rem] leading-none text-navy sm:text-[2.5rem] lg:text-[3.25rem]"
+                    : "whitespace-nowrap font-display text-[1.75rem] italic leading-none text-blue sm:text-[2.5rem] lg:text-[3.25rem]"
+                }
+              >
                 {item}
               </span>
-              <span aria-hidden className="size-2 shrink-0 rounded-full bg-navy/35" />
+              <span aria-hidden className="size-2 shrink-0 rotate-45 bg-navy/45 sm:size-2.5" />
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="edge-fade mt-[clamp(1rem,2.5vw,1.75rem)] overflow-hidden">
+        <ul
+          className="marquee-track marquee-reverse items-center"
+          style={
+            {
+              "--marquee-duration": "40s",
+              "--marquee-duration-sm": "26s",
+            } as CSSProperties
+          }
+        >
+          {rowB.map((item, index) => (
+            <li
+              key={`b-${item}-${index}`}
+              aria-hidden={index >= marqueeItemsAlt.length}
+              className="flex shrink-0 items-center px-[0.4rem] sm:px-[0.6rem]"
+            >
+              <span className="whitespace-nowrap rounded-pill border border-navy/30 px-4 py-2 text-[0.75rem] font-medium uppercase tracking-[0.16em] text-navy/80 sm:px-5 sm:py-2.5 sm:text-[0.8125rem]">
+                {item}
+              </span>
             </li>
           ))}
         </ul>

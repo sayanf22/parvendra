@@ -48,7 +48,7 @@ function CommitmentCard({ item }: { item: Commitment }) {
         <Icon className="size-[1.35rem]" />
       </span>
 
-      <h3 className="mt-5 text-[1rem] font-semibold leading-snug tracking-[-0.012em] text-navy">
+      <h3 className="mt-5 font-sans text-[1rem] font-semibold leading-snug tracking-[-0.012em] text-navy">
         {item.title}
       </h3>
 

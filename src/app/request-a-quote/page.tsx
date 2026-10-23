@@ -2,34 +2,22 @@ import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/layout/PageHero";
 import { QuoteForm } from "@/components/forms/QuoteForm";
-import {
-  CheckIcon,
-  ClockIcon,
-  MailIcon,
-  PhoneIcon,
-  WhatsAppIcon,
-} from "@/components/icons";
+import { CheckIcon, WhatsAppIcon } from "@/components/icons";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Request a Bulk Quote — Wholesale Price List & Pack Sizes",
-  description: `Tell us your volumes and delivery city and ${site.contact} returns bulk pricing, pack sizes and the next dispatch slot within one working day. Trade enquiries across India.`,
+  title: `Request a Quote: ${site.name}`,
+  description: `Request a quote for gold and silver décor pieces. List the pieces and quantities you need, and ${site.name} replies on WhatsApp.`,
   path: "/request-a-quote",
-  keywords: [
-    "frozen berries wholesale price list India",
-    "bulk fruit puree quote Mumbai",
-    "restaurant ingredient supplier quote",
-    "HORECA supplier bulk pricing India",
-  ],
+  keywords: ["bulk gold decor quote India", "request quote decor pieces"],
 });
 
-const promises = [
-  "Pricing back within one working day",
-  "Pack sizes from 1 kg to full pallet",
-  "Samples available for first orders",
-  "Any line across our five categories",
+const steps = [
+  "Choose the pieces and quantities you need",
+  "Send the request, which opens in WhatsApp",
+  "We reply on WhatsApp with availability and your quote",
 ];
 
 export default function RequestQuotePage() {
@@ -38,7 +26,7 @@ export default function RequestQuotePage() {
       <PageHero
         eyebrow="Bulk enquiries"
         title="Request a Quote"
-        description={`Share a few details about your kitchen and volumes. A member of the ${site.company} supply team will come back with pricing, availability and dispatch dates.`}
+        description={`List the pieces and quantities you need. Your request opens in WhatsApp, and we reply there.`}
         crumbs={[{ label: "Home", href: "/" }, { label: "Request a Quote" }]}
       />
 
@@ -55,7 +43,7 @@ export default function RequestQuotePage() {
                   What happens next
                 </h2>
                 <ul className="mt-4 space-y-3">
-                  {promises.map((line) => (
+                  {steps.map((line) => (
                     <li key={line} className="flex gap-3 text-muted">
                       <CheckIcon className="mt-0.5 size-5 shrink-0 rounded-full bg-lime-soft p-1 text-navy" />
                       {line}
@@ -72,33 +60,13 @@ export default function RequestQuotePage() {
                   <li>
                     <a
                       href={site.whatsappHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="flex min-h-11 items-center gap-3 text-muted transition-colors duration-300 hover:text-navy"
                     >
                       <WhatsAppIcon className="size-4 shrink-0 text-navy" />
-                      WhatsApp {site.contact}
+                      WhatsApp {site.phone}
                     </a>
-                  </li>
-                  <li>
-                    <a
-                      href={site.phoneHref}
-                      className="flex min-h-11 items-center gap-3 text-muted transition-colors duration-300 hover:text-navy"
-                    >
-                      <PhoneIcon className="size-4 shrink-0 text-navy" />
-                      {site.phone}
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href={`mailto:${site.email}`}
-                      className="flex min-h-11 items-center gap-3 text-muted transition-colors duration-300 hover:text-navy"
-                    >
-                      <MailIcon className="size-4 shrink-0 text-navy" />
-                      {site.email}
-                    </a>
-                  </li>
-                  <li className="flex items-center gap-3 text-muted">
-                    <ClockIcon className="size-4 shrink-0 text-navy" />
-                    {site.hours}
                   </li>
                 </ul>
               </div>

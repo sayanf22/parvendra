@@ -1,190 +1,109 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { PageHero } from "@/components/layout/PageHero";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { QuoteCta } from "@/components/home/QuoteCta";
-import { MissionVision } from "@/components/about/MissionVision";
-import { TrustedBrands } from "@/components/home/TrustedBrands";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
+import { categories, products } from "@/lib/products";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
-  title: `About ${site.name} by ${site.company} — Our Founder & Story`,
-  description: `${site.name} is the signature food-service brand of ${site.company}, founded in ${site.city} by ${site.founder}. Meet the team supplying premium ingredients to 5-star hotels, fine-dining restaurants and cafés.`,
+  title: `About ${site.name} — Gold & Silver Home Décor`,
+  description: `${site.name} offers gold and silver décor pieces, including figurines, vases, flower stands and serving trays. Every piece is listed with its price in Indian Rupees.`,
   path: "/about",
-  keywords: [
-    site.name,
-    site.company,
-    "Adira Enterprises",
-    "Breadberry by Adhira Enterprises",
-    "Adhira Enterprises Mumbai",
-    site.founder,
-    "premium food importer India",
-  ],
+  keywords: ["about Indian Invention Boy", "gold home decor collection India"],
 });
 
-const timeline = [
+const steps = [
   {
-    year: site.founded,
-    title: `${site.company} founded`,
-    body: `${site.founder} establishes the Mumbai business to connect professional kitchens with dependable, globally sourced ingredients.`,
+    title: "Choose a piece",
+    body: "Browse the collection and open the product you like. Each page shows its price and catalogue number.",
   },
   {
-    year: "Growth",
-    title: "Trusted by hospitality teams",
-    body: "The business grows into a procurement partner for 5-star hotel groups, fine-dining restaurants, cafés, confectioneries and artisanal bakers.",
+    title: "Send an enquiry",
+    body: "Send the piece name or catalogue number to us on WhatsApp.",
   },
   {
-    year: "Breadberry",
-    title: `${site.name} takes shape`,
-    body: `${site.name} becomes the signature brand of ${site.company}, focused on premium frozen berries, fruit purees and specialist culinary lines.`,
-  },
-  {
-    year: "Today",
-    title: `${site.clientsServed} kitchens served`,
-    body: "A curated catalogue now serves professional kitchens with careful sourcing, cold-chain handling and responsive trade support.",
+    title: "Confirm your order",
+    body: "We reply on WhatsApp with availability and the next steps.",
   },
 ];
 
 export default function AboutPage() {
-  const heroStats = [
-    { value: site.clientsServed, label: "Kitchens served" },
-    { value: "5-star", label: "Hotels & fine-dine restaurants" },
-    { value: "77+", label: "Product lines" },
-    { value: site.founded, label: "Est. Mumbai" },
-  ];
-
   return (
     <>
       <PageHero
-        eyebrow={`${site.name} by ${site.company}`}
-        title="The story behind Breadberry Co."
-        description={`${site.name} is the signature brand of ${site.company}, founded in ${site.city} by ${site.founder} to bring dependable premium ingredients to professional kitchens.`}
+        eyebrow={site.name}
+        title="About Indian Invention Boy"
+        description="Indian Invention Boy brings together gold and silver décor pieces for the home. Every price is listed in Indian Rupees, and enquiries are handled on WhatsApp."
         crumbs={[{ label: "Home", href: "/" }, { label: "About Us" }]}
-      >
-        {/* Quick-read facts strip instead of a video */}
-        <dl className="mt-2 flex flex-wrap gap-x-8 gap-y-3">
-          {heroStats.map(({ value, label }) => (
-            <div key={label}>
-              <dt className="text-[0.6875rem] font-medium uppercase tracking-[0.13em] text-muted-soft">
-                {label}
-              </dt>
-              <dd className="mt-0.5 font-display text-[1.375rem] font-semibold leading-none text-navy">
-                {value}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </PageHero>
+      />
 
-      {/* Story */}
-      <section
-        aria-labelledby="story-heading"
-        className="py-[clamp(3rem,7vw,5rem)]"
-      >
+      {/* Collections, counted from the price list */}
+      <section className="py-[clamp(2.5rem,6vw,4.5rem)]">
         <Container>
-          <div className="grid items-start gap-[clamp(2rem,5vw,4rem)] lg:grid-cols-[1.1fr_0.9fr]">
-            <Reveal>
-              <SectionHeading
-                eyebrow="Breadberry & Adhira"
-                title={<span id="story-heading">One company, one signature brand</span>}
-              />
-              <div className="mt-6 space-y-4 text-muted">
-                <p>
-                  <strong className="font-semibold text-navy">{site.company}</strong>{" "}
-                  is the parent company founded in {site.city} in {site.founded}{" "}
-                  by {site.founder}. It was created to help professional kitchens
-                  source premium ingredients with dependable quality, careful
-                  handling and responsive service.
-                </p>
-                <p>
-                  <strong className="font-semibold text-navy">{site.name}</strong>{" "}
-                  is the company&rsquo;s signature brand. Breadberry brings together
-                  frozen berries, fruit purees and specialist culinary lines for
-                  pastry teams, chefs and food-service buyers. You may therefore
-                  see the business described as &ldquo;Breadberry by {site.company}.&rdquo;
-                </p>
-                <p>
-                  Today we supply 5-star hotel groups, fine-dining restaurants,
-                  cafés, premium confectioneries and artisanal bakers. Every
-                  range is selected for practical kitchen performance and moved
-                  with the storage and cold-chain care that the product requires.
-                </p>
-              </div>
-            </Reveal>
+          <Reveal>
+            <SectionHeading
+              eyebrow="The collection"
+              title={<span>{products.length} pieces in three collections</span>}
+              description="Figurines, vases and stands, and serving trays, in gold and silver finishes."
+            />
+          </Reveal>
 
-            {/* Founder portrait */}
-            <Reveal
-              delay={120}
-              className="relative aspect-[4/5] overflow-hidden rounded-hero"
-            >
-              <Image
-                src="/assets/founder-portrait.webp"
-                alt={`${site.founder}, Founder of ${site.company}`}
-                fill
-                sizes="(min-width: 1024px) 40vw, 90vw"
-                className="object-cover object-top"
-              />
-              <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/70 to-transparent px-5 pb-4 pt-12">
-                <span className="block text-[0.875rem] font-semibold text-white">
-                  {site.founder}
-                </span>
-                <span className="mt-0.5 block text-[0.75rem] text-cream/80">
-                  Founder, {site.company}
-                </span>
-              </span>
-            </Reveal>
+          <div className="mt-[clamp(1.75rem,3.5vw,2.5rem)] grid gap-5 sm:grid-cols-3">
+            {categories
+              .filter((category) => category.id !== "all")
+              .map((category, index) => {
+                const items = products.filter((p) => p.category === category.id);
+                return (
+                  <Reveal key={category.id} delay={index * 80}>
+                    <div className="h-full rounded-card border border-line-soft bg-white p-[clamp(1.25rem,2.5vw,1.75rem)] shadow-soft">
+                      <h2 className="font-sans text-[1.0625rem] font-semibold text-navy">
+                        {category.label}
+                      </h2>
+                      <p className="mt-1 text-[0.8125rem] text-muted-soft">
+                        {items.length} {items.length === 1 ? "piece" : "pieces"}
+                      </p>
+                      <ul className="mt-4 space-y-2.5">
+                        {items.map((item) => (
+                          <li key={item.slug} className="flex justify-between gap-4 text-[0.9375rem] text-muted">
+                            <span>{item.name}</span>
+                            <span className="shrink-0 font-medium text-navy">{item.priceLabel}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </Reveal>
+                );
+              })}
           </div>
         </Container>
       </section>
 
-      {/* Timeline */}
-      <section
-        aria-labelledby="timeline-heading"
-        className="pb-[clamp(3rem,7vw,5rem)]"
-      >
+      {/* How ordering works */}
+      <section className="pb-[clamp(2.5rem,6vw,4.5rem)]">
         <Container>
-          <Reveal className="rounded-panel bg-surface px-[clamp(1.125rem,3.5vw,3rem)] py-[clamp(2rem,5vw,3.5rem)]">
-            <SectionHeading
-              eyebrow="Milestones"
-              eyebrowTone="blue"
-              title={<span id="timeline-heading">How we got here</span>}
-              align="center"
-              className="mx-auto"
-            />
-
-            <ol className="mt-[clamp(1.75rem,3.5vw,2.75rem)] grid gap-[clamp(0.75rem,1.6vw,1.25rem)] sm:grid-cols-2 lg:grid-cols-4">
-              {timeline.map((entry, index) => (
-                <Reveal
-                  key={entry.title}
-                  as="li"
-                  delay={index * 80}
-                  className="card-surface group p-[clamp(1.25rem,2.4vw,1.75rem)]"
-                >
-                  <span className="inline-flex rounded-full bg-lime-soft px-2.5 py-1 text-eyebrow font-medium uppercase text-navy">
-                    {entry.year}
-                  </span>
-                  <h3 className="mt-3 text-[1.0625rem] font-semibold leading-snug tracking-[-0.012em] text-navy">
-                    {entry.title}
-                  </h3>
-                  <p className="mt-2.5 text-muted">{entry.body}</p>
-                </Reveal>
-              ))}
-            </ol>
+          <Reveal>
+            <SectionHeading eyebrow="How to order" title={<span>Three simple steps</span>} />
           </Reveal>
+
+          <ol className="mt-[clamp(1.75rem,3.5vw,2.5rem)] grid gap-5 sm:grid-cols-3">
+            {steps.map((step, index) => (
+              <Reveal key={step.title} delay={index * 80} as="li">
+                <div className="h-full rounded-card bg-surface p-[clamp(1.25rem,2.5vw,1.75rem)]">
+                  <span className="grid size-9 place-items-center rounded-full bg-lime-soft text-[0.875rem] font-semibold text-navy">
+                    {index + 1}
+                  </span>
+                  <h3 className="mt-4 font-sans text-[1rem] font-semibold text-navy">{step.title}</h3>
+                  <p className="mt-2 text-[0.9375rem] leading-relaxed text-muted">{step.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </ol>
         </Container>
       </section>
-
-      <MissionVision />
-
-      <TrustedBrands
-        eyebrow="Trusted by brands"
-        title="Who we supply"
-        description={`From 5-star hotel groups to neighbourhood cafés — the kitchens that have made ${site.company} their procurement partner.`}
-      />
 
       <QuoteCta />
 

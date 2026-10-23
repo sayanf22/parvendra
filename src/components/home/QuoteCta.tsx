@@ -2,23 +2,14 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { ButtonLink } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/SectionHeading";
-import {
-  BowlIcon,
-  CheeseIcon,
-  FishIcon,
-  LeafIcon,
-  PhoneIcon,
-  SnowflakeIcon,
-} from "@/components/icons";
+import { SparkleIcon, WhatsAppIcon, CheckIcon, UsersIcon } from "@/components/icons";
 import { site } from "@/lib/site";
 
-/** Portfolio chips — scannable proof of range before the ask. */
+/** Collection chips, shown above the call to action. */
 const chips = [
-  { icon: SnowflakeIcon, label: "Berries & purees" },
-  { icon: LeafIcon, label: "Imported vegetables" },
-  { icon: CheeseIcon, label: "Artisanal cheeses" },
-  { icon: BowlIcon, label: "Asian groceries" },
-  { icon: FishIcon, label: "Frozen seafood" },
+  { icon: SparkleIcon, label: "Figurines" },
+  { icon: CheckIcon, label: "Vases & Stands" },
+  { icon: UsersIcon, label: "Serving Trays" },
 ];
 
 export function QuoteCta() {
@@ -34,7 +25,7 @@ export function QuoteCta() {
             className="absolute inset-0 -z-10"
             style={{
               background:
-                "radial-gradient(58% 68% at 50% 0%, rgb(195 255 171 / .34) 0%, transparent 66%), radial-gradient(46% 60% at 90% 104%, rgb(252 226 234 / .5) 0%, transparent 70%)",
+                "radial-gradient(58% 68% at 50% 0%, rgb(211 180 150 / .3) 0%, transparent 66%), radial-gradient(46% 60% at 90% 104%, rgb(211 180 150 / .25) 0%, transparent 70%)",
             }}
           />
 
@@ -53,20 +44,16 @@ export function QuoteCta() {
             </ul>
 
             <Eyebrow className="mt-[clamp(1.5rem,3vw,2rem)]">
-              Partner with us
+              Place an order
             </Eyebrow>
 
-            <h2
-              id="cta-heading"
-              className="mt-3 max-w-[24ch] text-h2"
-            >
-              Your kitchen deserves the finest canvas
+            <h2 id="cta-heading" className="mt-3 max-w-[24ch] text-h2">
+              Find the piece for your home
             </h2>
 
             <p className="text-lead mt-4 max-w-[50ch] text-muted">
-              Tell us the lines you need and where you are in {site.city}. We
-              come back with availability, pack sizes and pricing within one
-              working day.
+              Tell us which pieces you want and how many. Your enquiry goes to
+              WhatsApp, and we reply with availability and the total.
             </p>
 
             <div className="mt-[clamp(1.75rem,3vw,2.25rem)] flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
@@ -80,18 +67,15 @@ export function QuoteCta() {
               </ButtonLink>
 
               <a
-                href={site.phoneHref}
+                href={site.whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex h-[3.25rem] items-center justify-center gap-2.5 rounded-pill border border-lime-soft bg-white/60 px-6 text-[0.9375rem] font-medium text-navy transition-[background-color,border-color] duration-300 hover:border-lime-soft hover:bg-white"
               >
-                <PhoneIcon className="size-[1.05rem] text-navy" />
+                <WhatsAppIcon className="size-[1.05rem] text-navy" />
                 {site.phone}
               </a>
             </div>
-
-            <p className="mt-5 text-[0.75rem] text-muted-soft">
-              Serving 5-star hotels, fine-dining restaurants, premium
-              confectioneries &amp; artisanal bakers
-            </p>
           </div>
         </Reveal>
       </Container>

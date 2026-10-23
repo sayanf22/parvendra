@@ -5,23 +5,23 @@
    ========================================================================== */
 @theme {
   /* Brand palette */
-  --color-navy: #0b2c4f;
-  --color-navy-deep: #06203c;
-  --color-ink: #102a45;
-  --color-blue: #1e7fc9;
-  --color-blue-mid: #4c9edd;
-  --color-blue-soft: #eaf2fc;
-  --color-blue-mist: #f4f9fd;
-  --color-berry: #c0384f;
+  --color-navy: #32211a;
+  --color-navy-deep: #1f140f;
+  --color-ink: #2b1d16;
+  --color-blue: #8a5a3c;
+  --color-blue-mid: #a57856;
+  --color-blue-soft: #f4ece6;
+  --color-blue-mist: #faf6f2;
+  --color-berry: #8c2f1f;
 
   /* ── Light green family ─────────────────────────────────────────────────
-     #c3ffab is the single green accent across the site. It is intentionally
+     #e5d3c2 is the single green accent across the site. It is intentionally
      used as a fill, rule or highlight with navy ink; it is too light for body
      text on white. The pale steps support larger low-contrast surfaces. */
-  --color-lime-soft: #c3ffab;
-  --color-lime-tint: #e6f8dc;
-  --color-lime-panel: #eef8e8;
-  --color-lime-mist: #f2fbee;
+  --color-lime-soft: #e5d3c2;
+  --color-lime-tint: #efe3d7;
+  --color-lime-panel: #f5ede5;
+  --color-lime-mist: #faf5f0;
 
   /* Legacy semantic aliases keep existing utilities consistent while ensuring
      no dark emerald survives in authored UI. Foregrounds on light surfaces
@@ -41,23 +41,23 @@
   --color-cream-soft: #fdfbf5;
 
   /* Neutrals */
-  --color-muted: #5c7386;
-  --color-muted-soft: #8b9bab;
-  --color-line: #e4eaf0;
-  --color-line-soft: #edf1f6;
-  --color-surface: #f6f8fb;
-  --color-surface-2: #fbfcfe;
+  --color-muted: #6e5b4f;
+  --color-muted-soft: #9b8b80;
+  --color-line: #e7ded6;
+  --color-line-soft: #f0ebe5;
+  --color-surface: #f7f3ef;
+  --color-surface-2: #fcfaf8;
 
   /* Product tints */
-  --color-tint-blueberry: #e9f1fb;
-  --color-tint-raspberry: #fdebf1;
-  --color-tint-strawberry: #fdeeeb;
-  --color-tint-passion: #fdf4d8;
+  --color-tint-blueberry: #f3ece6;
+  --color-tint-raspberry: #f5ece8;
+  --color-tint-strawberry: #f5ece8;
+  --color-tint-passion: #f5efe6;
   /* Category tints for the wider catalogue — same lightness as the berries so
      cards sit level next to each other in a mixed grid. */
-  --color-tint-leaf: #eef6ea;
-  --color-tint-sand: #f8f3e8;
-  --color-tint-ocean: #eaf2f8;
+  --color-tint-leaf: #f4efe9;
+  --color-tint-sand: #f7f1ea;
+  --color-tint-ocean: #f1ece7;
 
   /* Typography — editorial serif for display, grotesque for UI */
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
@@ -93,10 +93,10 @@
   --radius-hero: 2rem;
 
   /* Elevation */
-  --shadow-soft: 0 1px 2px rgb(11 44 79 / 0.04), 0 8px 24px -10px rgb(11 44 79 / 0.09);
-  --shadow-card: 0 1px 2px rgb(11 44 79 / 0.04), 0 20px 44px -20px rgb(11 44 79 / 0.18);
-  --shadow-lift: 0 2px 4px rgb(11 44 79 / 0.05), 0 34px 64px -24px rgb(11 44 79 / 0.26);
-  --shadow-btn: 0 10px 24px -12px rgb(11 44 79 / 0.6);
+  --shadow-soft: 0 1px 2px rgb(50 33 26 / 0.04), 0 8px 24px -10px rgb(50 33 26 / 0.09);
+  --shadow-card: 0 1px 2px rgb(50 33 26 / 0.04), 0 20px 44px -20px rgb(50 33 26 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(50 33 26 / 0.05), 0 34px 64px -24px rgb(50 33 26 / 0.26);
+  --shadow-btn: 0 10px 24px -12px rgb(50 33 26 / 0.6);
 
   /* Motion */
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
@@ -182,9 +182,9 @@
   .card-surface {
     /* Overridable per card so a tinted surface keeps its own accent rather
        than inheriting the default blue. */
-    --card-ring: rgb(30 127 201 / 0.55);
-    --card-ring-mid: rgb(76 158 221 / 0.22);
-    --card-glow: rgb(30 127 201 / 0.07);
+    --card-ring: rgb(138 90 60 / 0.55);
+    --card-ring-mid: rgb(165 120 86 / 0.22);
+    --card-glow: rgb(138 90 60 / 0.07);
 
     position: relative;
     isolation: isolate;
@@ -348,18 +348,18 @@
     background:
       radial-gradient(
         58% 54% at 88% 14%,
-        rgb(211 232 250 / 0.85) 0%,
-        rgb(211 232 250 / 0) 68%
+        rgb(244 236 230 / 0.85) 0%,
+        rgb(244 236 230 / 0) 68%
       ),
       radial-gradient(
         44% 42% at 70% 58%,
-        rgb(252 226 234 / 0.6) 0%,
-        rgb(252 226 234 / 0) 70%
+        rgb(240 226 216 / 0.6) 0%,
+        rgb(240 226 216 / 0) 70%
       ),
       radial-gradient(
         66% 56% at 8% 2%,
-        rgb(238 245 252 / 0.8) 0%,
-        rgb(238 245 252 / 0) 66%
+        rgb(250 246 242 / 0.8) 0%,
+        rgb(250 246 242 / 0) 66%
       );
   }
 
@@ -488,43 +488,6 @@
 .hero-art {
   animation: bb-fade 1s var(--ease-out-soft) both;
   animation-delay: 120ms;
-}
-
-/* ── Blessing animations ───────────────────────────────────────────────── */
-
-.blessing-text {
-  animation: bb-blessing-text 1.2s var(--ease-out-soft) both;
-}
-
-.blessing-icon {
-  animation: bb-blessing-icon 1.4s var(--ease-out-soft) 0.3s both;
-}
-
-@keyframes bb-blessing-text {
-  from {
-    opacity: 0;
-    letter-spacing: 0.4em;
-    filter: blur(3px);
-  }
-  to {
-    opacity: 1;
-    letter-spacing: 0.16em;
-    filter: blur(0);
-  }
-}
-
-@keyframes bb-blessing-icon {
-  0% {
-    opacity: 0;
-    transform: scale(0.4) rotate(-15deg);
-  }
-  60% {
-    opacity: 1;
-    transform: scale(1.1) rotate(3deg);
-  }
-  100% {
-    transform: scale(1) rotate(0deg);
-  }
 }
 
 .float-slow {

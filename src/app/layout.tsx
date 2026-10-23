@@ -14,10 +14,7 @@ const geist = Geist({
   display: "swap",
 });
 
-/**
- * Display type. Editorial serif matching the supplied reference —
- * swap this single import to change every heading on the site.
- */
+/** Display type. Editorial serif for headings. */
 const newsreader = Newsreader({
   variable: "--font-newsreader",
   subsets: ["latin"],
@@ -28,40 +25,28 @@ const newsreader = Newsreader({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    /* Brand + parent company + category + city: the four things people
-       actually type. Both name spellings are covered by the description and
-       the entity aliases in structured data. */
-    default: `${site.name} by ${site.company} — ${site.tagline} Supplier in ${site.city}, India`,
-    template: `%s · ${site.name} by ${site.company}`,
+    default: `${site.name} — ${site.tagline}`,
+    template: `%s · ${site.name}`,
   },
   description: site.description,
   applicationName: site.name,
-  authors: [{ name: site.company, url: site.url }],
-  creator: site.company,
-  publisher: site.company,
-  category: "Food & Beverage Wholesale",
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  publisher: site.name,
+  category: "Home Decor",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    siteName: `${site.name} by ${site.company}`,
-    title: `${site.name} by ${site.company} — ${site.tagline}`,
+    siteName: site.name,
+    title: `${site.name} — ${site.tagline}`,
     description: site.description,
     url: site.url,
     locale: "en_IN",
-    images: [
-      {
-        url: "/og.jpg",
-        width: 1200,
-        height: 630,
-        alt: `${site.name} by ${site.company} — ${site.tagline}`,
-      },
-    ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: `${site.name} by ${site.company}`,
+    card: "summary",
+    title: site.name,
     description: site.description,
-    images: ["/og.jpg"],
   },
   robots: {
     index: true,
@@ -89,19 +74,6 @@ export const metadata: Metadata = {
     title: site.name,
     statusBarStyle: "default",
     capable: true,
-  },
-  icons: {
-    /* favicon.ico carries 16/32/48 for legacy browsers and bookmark bars; the
-       PNGs are what modern browsers and Android actually pick up. */
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icons/favicon-32.png", type: "image/png", sizes: "32x32" },
-      { url: "/icons/favicon-16.png", type: "image/png", sizes: "16x16" },
-      { url: "/icons/icon-192.png", type: "image/png", sizes: "192x192" },
-      { url: "/icons/icon-512.png", type: "image/png", sizes: "512x512" },
-    ],
-    apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180" }],
-    shortcut: ["/favicon.ico"],
   },
 };
 

@@ -1,5 +1,4 @@
-import { products } from "@/lib/products";
-import { portfolio, catalogueHref } from "@/lib/portfolio";
+import { categories, products } from "@/lib/products";
 import { navLinks, site } from "@/lib/site";
 
 export type SearchResult = {
@@ -18,33 +17,29 @@ const PAGES: SearchResult[] = navLinks
     title: link.label,
     description:
       link.href === "/products"
-        ? `Browse ${products.length} frozen, chilled and fresh lines.`
+        ? `Browse ${products.length} gold and silver pieces, each with its price.`
         : link.href === "/why-us"
-          ? "Cold-chain control, verified provenance and consistent supply."
+          ? "Clear prices, catalogue numbers and simple WhatsApp enquiries."
           : link.href === "/about"
-            ? `${site.name} is the signature brand of ${site.company}.`
-            : `Talk to ${site.contact} about your order.`,
+            ? `About ${site.name} and how to order.`
+            : "Enquire about a piece on WhatsApp.",
     href: link.href,
     group: "Page" as const,
   }));
 
-/**
- * Only include categories that have their own unique catalogue href, so
- * "Artisanal Cheeses" (which falls back to `/products`) doesn't create a
- * duplicate key and a confusing duplicate entry in results.
- */
-const CATEGORY_RESULTS: SearchResult[] = portfolio
-  .filter((c) => c.catalogueCategory)
+/** One result per collection tab, each with its own filtered catalogue URL. */
+const CATEGORY_RESULTS: SearchResult[] = categories
+  .filter((c) => c.id !== "all")
   .map((category) => ({
-    title: category.name,
-    description: category.summary,
-    href: catalogueHref(category),
+    title: category.label,
+    description: `Browse the ${category.label.toLowerCase()} collection.`,
+    href: `/products?category=${category.id}#range`,
     group: "Category" as const,
   }));
 
 const PRODUCT_RESULTS: SearchResult[] = products.map((product) => ({
   title: product.name,
-  description: `${product.categoryLabel} · ${product.form}`,
+  description: `${product.categoryLabel} · ${product.finish} · ${product.priceLabel}`,
   href: `/products/${product.slug}`,
   image: product.image,
   group: "Product" as const,
@@ -133,7 +128,7 @@ function score(query: string, entry: (typeof ENTRIES)[number]) {
     else if (inside) total += 7;
     /* Body matching is token-aware rather than a raw substring test. A plain
        `includes` let "berries" match the About page purely because its copy
-       contains "Breadberry", which is not a result anyone wants. */
+       contains "gold", which is not a result anyone wants. */
     else if (
       entry.bodyTokens.some((t) => t === word || t.startsWith(word))
     ) {

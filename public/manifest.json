@@ -1,29 +1,17 @@
 {
-  "name": "Breadberry Co. by Adhira Enterprises",
-  "short_name": "Breadberry Co.",
-  "description": "Wholesale supplier of IQF frozen berries, fruit purees, imported fresh produce and frozen seafood in Mumbai, India.",
+  "name": "Indian Invention Boy",
+  "short_name": "Indian Invention Boy",
+  "description": "Gold and silver home décor: figurines, vases, flower stands and serving trays, with prices in Indian Rupees.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#0b2c4f",
+  "theme_color": "#32211a",
   "icons": [
     {
-      "src": "/icons/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/icons/icon-512.png",
+      "src": "/logo.webp",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/webp",
       "purpose": "any"
-    },
-    {
-      "src": "/icons/maskable-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
     }
   ]
 }

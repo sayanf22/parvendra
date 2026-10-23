@@ -3,10 +3,10 @@ import { site, social } from "@/lib/site";
 import type { Product } from "@/lib/products";
 
 /**
- * Advanced SEO helpers & JSON-LD Entity Graph Builders.
+ * Metadata and JSON-LD helpers for Indian Invention Boy.
  *
- * Provides full Schema.org structured data, canonical URL resolutions,
- * OpenGraph/Twitter cards, and commercial long-tail keyword indexing for Google.
+ * Structured data must match what the page shows. Every price in `offers` is
+ * printed on the matching product page.
  */
 
 const ORG_ID = `${site.url}/#organization`;
@@ -16,6 +16,16 @@ const SITE_ID = `${site.url}/#website`;
 export function canonical(path: string) {
   return path === "/" ? `${site.url}/` : `${site.url}${path}`;
 }
+
+const defaultKeywords = [
+  "Indian Invention Boy",
+  "gold figurines India",
+  "gold home decor India",
+  "silver serving trays India",
+  "gold flower stand price",
+  "gold sunburst vase India",
+  "decorative figurines with price in rupees",
+];
 
 export function pageMetadata({
   title,
@@ -30,18 +40,6 @@ export function pageMetadata({
 }): Metadata {
   const url = canonical(path);
 
-  const defaultKeywords = [
-    "frozen berries supplier Mumbai",
-    "IQF frozen berries wholesale India",
-    "fruit puree supplier for bakeries",
-    "imported fresh vegetables Mumbai",
-    "HORECA food supplier India",
-    "Adhira Enterprises Mumbai",
-    "Adira Enterprises food supplier",
-    "Breadberry Co",
-    "premium food importer Mumbai India",
-  ];
-
   const mergedKeywords = keywords
     ? Array.from(new Set([...keywords, ...defaultKeywords]))
     : defaultKeywords;
@@ -53,129 +51,49 @@ export function pageMetadata({
     alternates: { canonical: url },
     openGraph: {
       type: "website",
-      siteName: `${site.name} by ${site.company}`,
+      siteName: site.name,
       title: `${title} · ${site.name}`,
       description,
       url,
       locale: "en_IN",
-      /* Purpose-built 1200x630 card. The bare logo used to be declared at
-         these dimensions, which made every share preview letterbox badly. */
-      images: [
-        {
-          url: `${site.url}/og.jpg`,
-          width: 1200,
-          height: 630,
-          alt: `${site.name} by ${site.company}`,
-        },
-      ],
     },
     twitter: {
-      card: "summary_large_image",
+      card: "summary",
       title: `${title} · ${site.name}`,
       description,
-      images: [`${site.url}/og.jpg`],
     },
   };
 }
 
-const postalAddress = {
-  "@type": "PostalAddress",
-  streetAddress: "G/3, Bhagwanti Niwas, T H Kataria Marg, Mahim",
-  addressLocality: site.city,
-  postalCode: "400016",
-  addressRegion: site.region,
-  addressCountry: site.country,
-};
-
-/**
- * Comprehensive Organization & LocalBusiness Knowledge Graph Entity.
- */
+/** Organization entity for the whole site. */
 export function organizationSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": ["Organization", "LocalBusiness", "Wholesaler", "FoodEstablishment"],
+    "@type": "Organization",
     "@id": ORG_ID,
-    name: `${site.name} by ${site.company}`,
-    legalName: site.company,
-    alternateName: [site.name, site.company, ...site.alternateNames],
+    name: site.name,
+    alternateName: [site.name.toUpperCase()],
     description: site.description,
     url: site.url,
-    logo: `${site.url}/assets/logo-mark.png`,
-    image: `${site.url}/og.jpg`,
+    logo: `${site.url}/logo.webp`,
     telephone: site.phone,
-    email: site.email,
-    foundingDate: site.founded,
-    founder: { "@type": "Person", name: site.founder },
-    address: postalAddress,
-    openingHours: site.openingHours,
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-        ],
-        opens: "09:00",
-        closes: "19:00",
-      },
-    ],
-    priceRange: "₹₹ (Trade & Wholesale B2B Rates)",
     areaServed: { "@type": "Country", name: "India" },
     contactPoint: [
       {
         "@type": "ContactPoint",
-        contactType: "customer service",
-        name: site.contact,
+        contactType: "sales",
         telephone: site.phone,
-        email: site.email,
+        url: site.whatsappHref,
         areaServed: "IN",
-        availableLanguage: ["English", "Hindi", "Marathi"],
+        availableLanguage: ["English", "Hindi"],
       },
     ],
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Wholesale Gourmet Food Categories",
-      itemListElement: [
-        {
-          "@type": "OfferCatalog",
-          name: "IQF Frozen Berries",
-          description: "Whole frozen strawberries, blueberries, raspberries, blackberries, cranberries, mix berries",
-        },
-        {
-          "@type": "OfferCatalog",
-          name: "Fruit Purees",
-          description: "Patisserie and beverage fruit purees: strawberry, blueberry, raspberry, passionfruit, acai",
-        },
-        {
-          "@type": "OfferCatalog",
-          name: "Fresh Produce & Speciality Greens",
-          description: "Chilled farm supply: avocados, asparagus, fresh berries, heirloom tomatoes, mushrooms, leafy greens",
-        },
-        {
-          "@type": "OfferCatalog",
-          name: "Bakery & Japanese Staples",
-          description: "Nori, bao buns, fillo & kataifi pastry sheets, gyoza skins, panko, edamame",
-        },
-        {
-          "@type": "OfferCatalog",
-          name: "Frozen Seafood",
-          description: "Norwegian salmon, Atlantic smoked salmon, hamachi fillet, tuna saku, black cod, Chilean seabass, tobikko roe",
-        },
-      ],
-    },
     sameAs: social.map((profile) => profile.href),
     knowsAbout: [
-      "IQF frozen berries wholesale",
-      "fruit purees for patisserie and gelaterias",
-      "imported fresh vegetables Mumbai",
-      "artisanal cheese and dairy",
-      "Asian dry groceries & sushi ingredients",
-      "frozen seafood supplier Mumbai",
-      "cold chain foodservice distribution",
+      "gold figurines",
+      "gold vases and flower stands",
+      "silver serving trays",
+      "home decor",
     ],
   };
 }
@@ -186,8 +104,8 @@ export function websiteSchema() {
     "@type": "WebSite",
     "@id": SITE_ID,
     url: site.url,
-    name: `${site.name} by ${site.company}`,
-    inLanguage: "en-IN",
+    name: site.name,
+    inLanguage: site.language,
     publisher: { "@id": ORG_ID },
   };
 }
@@ -206,19 +124,9 @@ export function breadcrumbSchema(items: { name: string; path: string }[]) {
 }
 
 /**
- * Product entity for structured data. Deliberately omits `offers`,
- * `aggregateRating` and `review` because:
- *
- * 1. Prices are quoted per enquiry (not displayed on the page), so Google's
- *    requirement that structured data must match visible content cannot be met.
- * 2. There are no published reviews or ratings on the site.
- *
- * Without `offers`, this is a valid Product entity that provides name, image,
- * brand, category and description to Google without triggering the "missing
- * lowPrice/highPrice/review/aggregateRating" warnings in Search Console.
- *
- * If public pricing or a review system is added later, re-introduce `offers`
- * with real `lowPrice`/`highPrice` and `review`/`aggregateRating` fields.
+ * Product entity with a single INR offer. The price is the same figure printed
+ * on the product page, so the structured data matches the visible content.
+ * `availability` is left out until the client confirms stock status.
  */
 export function productSchema(product: Product) {
   return {
@@ -230,6 +138,12 @@ export function productSchema(product: Product) {
     category: product.categoryLabel,
     brand: { "@type": "Brand", name: site.name },
     url: canonical(`/products/${product.slug}`),
+    offers: {
+      "@type": "Offer",
+      url: canonical(`/products/${product.slug}`),
+      price: product.price,
+      priceCurrency: site.currency,
+    },
     additionalProperty: product.specs.map((spec) => ({
       "@type": "PropertyValue",
       name: spec.label,
@@ -242,7 +156,7 @@ export function itemListSchema(products: Product[]) {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: `${site.company} wholesale catalogue`,
+    name: `${site.name} product catalogue`,
     numberOfItems: products.length,
     itemListElement: products.map((product, index) => ({
       "@type": "ListItem",

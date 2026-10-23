@@ -9,7 +9,7 @@ const noopSubscribe = () => () => {};
 import { cn } from "@/lib/cn";
 import { navLinks, site } from "@/lib/site";
 import { ButtonLink } from "@/components/ui/Button";
-import { ArrowRightIcon, MailIcon, PhoneIcon } from "@/components/icons";
+import { ArrowRightIcon, WhatsAppIcon } from "@/components/icons";
 
 export function MobileNav({ pathname }: { pathname: string }) {
   /**
@@ -173,26 +173,16 @@ export function MobileNav({ pathname }: { pathname: string }) {
 
         <dl className="mt-7 grid gap-3 text-[0.8125rem]">
           <div className="flex items-center gap-3">
-            <dt className="sr-only">Phone</dt>
-            <PhoneIcon className="size-4 shrink-0 text-blue" />
+            <dt className="sr-only">WhatsApp enquiries</dt>
+            <WhatsAppIcon className="size-4 shrink-0 text-blue" />
             <dd>
               <a
-                href={site.phoneHref}
+                href={site.whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-muted transition-colors duration-300 hover:text-navy"
               >
                 {site.phone}
-              </a>
-            </dd>
-          </div>
-          <div className="flex items-center gap-3">
-            <dt className="sr-only">Email</dt>
-            <MailIcon className="size-4 shrink-0 text-blue" />
-            <dd>
-              <a
-                href={`mailto:${site.email}`}
-                className="text-muted transition-colors duration-300 hover:text-navy"
-              >
-                {site.email}
               </a>
             </dd>
           </div>

@@ -1,42 +1,42 @@
 import type { ComponentType, SVGProps } from "react";
 import type { Feature } from "@/components/ui/FeatureCard";
 import {
-  BeakerIcon,
+  CheckIcon,
   GlobeIcon,
   ShieldCheckIcon,
-  SnowflakeIcon,
   SparkleIcon,
-  TruckIcon,
   UsersIcon,
+  WhatsAppIcon,
 } from "@/components/icons";
 
 /**
- * The Adhira difference — the four commitments behind every consignment.
- * Used as cards on the Why Us page.
+ * Reasons to buy, shown as cards on the Why Us page. Each point is something the
+ * catalogue or the enquiry flow already does. Nothing here is a sourcing or
+ * delivery promise the client has not made.
  */
 export const differenceFeatures: Feature[] = [
   {
-    icon: SnowflakeIcon,
-    title: "Rigorous cold-chain control",
-    body: "Frozen berries and purees are held at the temperature their flavour, colour and nutrition depend on — from source to your kitchen door.",
+    icon: CheckIcon,
+    title: "Prices shown up front",
+    body: "Every piece in the catalogue lists its price in Indian Rupees, so you know the cost before you enquire.",
     tone: "blue",
   },
   {
-    icon: ShieldCheckIcon,
-    title: "Verified provenance",
-    body: "Specialty gourmet labels are checked for authenticity, so what reaches your board is exactly what your menu claims.",
-    tone: "green",
-  },
-  {
-    icon: BeakerIcon,
-    title: "Uncompromising hygiene",
-    body: "Supplying 5-star kitchens and cake studios demands meticulous food handling. Our protocols are built around that, not bolted on.",
+    icon: SparkleIcon,
+    title: "Gold and silver finishes",
+    body: "The collection pairs warm gold figurines and vases with silver serving trays for the table.",
     tone: "berry",
   },
   {
-    icon: TruckIcon,
-    title: "Consistency you can plan around",
-    body: "Reliable, repeatable access to every line we carry, so your prep list is never rewritten by a delivery window.",
+    icon: WhatsAppIcon,
+    title: "Enquire on WhatsApp",
+    body: "Ask about a piece, its availability or a bulk order in one message. Replies come directly on WhatsApp.",
+    tone: "green",
+  },
+  {
+    icon: ShieldCheckIcon,
+    title: "Catalogue numbers",
+    body: "Each piece has a catalogue number, so you can refer to it clearly when you place an order.",
     tone: "blue",
   },
 ];
@@ -47,85 +47,67 @@ export type Commitment = {
   body: string;
   icon: ComponentType<SVGProps<SVGSVGElement>>;
   tone: "blue" | "green" | "berry" | "amber" | "teal";
-  /** Card width — mixed widths stop the row reading as a grid. */
+  /** Card width. Mixed widths stop the row reading as a grid. */
   size: "sm" | "md" | "lg";
-  /** Vertical stagger step (0–2). Held in data so both marquee copies match. */
+  /** Vertical stagger step (0 to 2). Held in data so both marquee copies match. */
   offset: 0 | 1 | 2;
 };
 
-/** Scrolling commitment row on the home page. */
+/** Scrolling highlight row on the home page. */
 export const commitments: Commitment[] = [
   {
-    tag: "Cold chain",
-    title: "Temperature, held",
-    body: "Frozen fruit purees need delicate, unbroken temperature control. That requirement shapes how we store, load and deliver — not the other way round.",
-    icon: SnowflakeIcon,
-    tone: "blue",
+    tag: "Figurines",
+    title: "Three golden figurines",
+    body: "A leopard, a sitting rabbit and a deer, each listed with its own price and catalogue number.",
+    icon: SparkleIcon,
+    tone: "amber",
     size: "lg",
     offset: 0,
   },
   {
-    tag: "Provenance",
-    title: "Labels, verified",
-    body: "Specialty gourmet products are only worth what their provenance can prove.",
-    icon: ShieldCheckIcon,
-    tone: "green",
-    size: "sm",
-    offset: 2,
-  },
-  {
-    tag: "Hygiene",
-    title: "Handling, respected",
-    body: "Supplying fine kitchens takes more than logistics. It demands a deep respect for meticulous food handling at every touchpoint.",
-    icon: BeakerIcon,
-    tone: "berry",
-    size: "md",
-    offset: 1,
-  },
-  {
-    tag: "Sourcing",
-    title: "Sourced globally",
-    body: "We buy from the origins that do each ingredient best, then hold them to one standard.",
+    tag: "Vases & stands",
+    title: "Vases and flower stands",
+    body: "A gold pedestal flower stand and a gold sunburst vase for fresh or dried arrangements.",
     icon: GlobeIcon,
-    tone: "teal",
+    tone: "green",
     size: "sm",
-    offset: 0,
-  },
-  {
-    tag: "Range",
-    title: "Continually developed",
-    body: "Through Breadberry Co. we keep extending into specialised culinary and baking avenues, so your menu is never limited by what we stock.",
-    icon: SparkleIcon,
-    tone: "amber",
-    size: "md",
     offset: 2,
   },
   {
-    tag: "Supply",
-    title: "1 kg to full pallet",
-    body: "Trial a line before you scale it. Pack sizes flex to the way your kitchen actually orders.",
-    icon: TruckIcon,
+    tag: "Serveware",
+    title: "Silver serving trays",
+    body: "Chevron-pattern silver trays for serving, priced in rupees.",
+    icon: UsersIcon,
     tone: "blue",
-    size: "sm",
+    size: "md",
     offset: 1,
   },
   {
-    tag: "Partnership",
-    title: "Built around your prep",
-    body: "Deliveries are scheduled to your prep days. Cold chain is our problem, never something you inherit.",
-    icon: UsersIcon,
-    tone: "green",
-    size: "md",
+    tag: "Pricing",
+    title: "Prices in rupees",
+    body: "Each piece is priced in Indian Rupees (₹) on the product page and in the price list.",
+    icon: CheckIcon,
+    tone: "teal",
+    size: "sm",
     offset: 0,
   },
   {
-    tag: "Standard",
-    title: "One grade only",
-    body: "If a lot does not meet grade it does not ship. There is no second tier.",
-    icon: ShieldCheckIcon,
-    tone: "teal",
-    size: "sm",
+    tag: "Enquiries",
+    title: "Reply on WhatsApp",
+    body: "Send the pieces you want and we answer on WhatsApp.",
+    icon: WhatsAppIcon,
+    tone: "green",
+    size: "md",
     offset: 2,
+  },
+  {
+    tag: "Bulk",
+    title: "Quotes for larger orders",
+    body: "Tell us the pieces and quantities you need, and we will quote the order.",
+    icon: UsersIcon,
+    tone: "berry",
+    size: "sm",
+    offset: 1,
   },
 ];
 
@@ -135,36 +117,36 @@ export type Proof = {
   note: string;
   href: string;
   cta: string;
-  /** Bento footprint — `lg` takes the wider column. */
+  /** Bento footprint. `lg` takes the wider column. */
   size: "lg" | "sm";
 };
 
-/** Green highlight cards under the commitment row. */
+/** Highlight cards under the commitment row. */
 export const proofPoints: Proof[] = [
   {
-    title: "1000+ kitchens served",
-    note: "Hotels, fine-dining restaurants, confectioneries, bakeries and cafés across Mumbai.",
-    href: "/about",
-    cta: "About Us",
+    title: "Six pieces in the catalogue",
+    note: "Figurines, vases, flower stands and serving trays, each with its price in rupees.",
+    href: "/products",
+    cta: "See the catalogue",
     size: "lg",
   },
   {
-    title: "Five curated categories",
-    note: "One sourcing standard applied across every line we carry.",
+    title: "Three collections",
+    note: "Figurines, vases & stands, and serving trays.",
     href: "/products",
-    cta: "See the selection",
+    cta: "Browse",
     size: "sm",
   },
   {
-    title: "Mumbai, since 2020",
-    note: "Founded to bridge world-class ingredients and the city's finest kitchens.",
-    href: "/about",
-    cta: "About Adhira",
+    title: "Ask on WhatsApp",
+    note: "Enquire about any piece in one message.",
+    href: "/contact",
+    cta: "Contact us",
     size: "sm",
   },
   {
-    title: "Quoted in one working day",
-    note: "Tell us the lines and volumes. Pricing, pack sizes and dispatch dates come back fast.",
+    title: "Quote for bulk orders",
+    note: "Tell us the pieces and quantities, and we will send a quote.",
     href: "/request-a-quote",
     cta: "Request a quote",
     size: "lg",

@@ -19,12 +19,13 @@ const cardWidth = {
    stable grid, so every card remains fully visible. */
 const cardLift = ["mt-0", "mt-0 lg:mt-7", "mt-0 lg:mt-12"] as const;
 
+/* Icon tiles stay in the logo family: brown, beige and cream. */
 const iconTones = {
   blue: "bg-blue-soft text-blue",
   green: "bg-lime-soft text-navy",
-  berry: "bg-[#fbe6eb] text-berry",
-  amber: "bg-[#fbf1d9] text-[#a4761c]",
-  teal: "bg-[#e4f1f3] text-[#1c7d88]",
+  berry: "bg-[#f3e3da] text-[#7a3f25]",
+  amber: "bg-[#f4ecd9] text-[#7d5a1e]",
+  teal: "bg-[#ece6df] text-navy",
 } as const;
 
 function CommitmentCard({ item }: { item: Commitment }) {
@@ -81,24 +82,24 @@ export function Difference() {
           className="absolute inset-0 -z-10"
           style={{
             background:
-              "radial-gradient(46% 60% at 50% -8%, rgb(195 255 171 / .1) 0%, transparent 70%), radial-gradient(38% 52% at 92% 106%, rgb(195 255 171 / .16) 0%, transparent 72%)",
+              "radial-gradient(46% 60% at 50% -8%, rgb(211 180 150 / .1) 0%, transparent 70%), radial-gradient(38% 52% at 92% 106%, rgb(211 180 150 / .16) 0%, transparent 72%)",
           }}
         />
 
         <Container>
           <Reveal className="flex flex-col items-center text-center">
             <Eyebrow tone="mint">
-              The {site.company.split(" ")[0]} difference
+              The {site.name} difference
             </Eyebrow>
             <h2
               id="difference-heading"
               className="mt-3 max-w-[26ch] text-h2 text-cream"
             >
-              Trust is built on consistency
+              Clear prices, simple enquiries
             </h2>
             <p className="text-lead mt-4 max-w-[52ch] text-cream/65">
-              We treat your ingredients with the same care and exactness you
-              apply to your final presentation.
+              Every piece shows its price and catalogue number, and every
+              enquiry goes straight to WhatsApp.
             </p>
           </Reveal>
         </Container>

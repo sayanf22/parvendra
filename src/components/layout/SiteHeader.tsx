@@ -10,7 +10,7 @@ import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/layout/Logo";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { SiteSearch } from "@/components/layout/SiteSearch";
-import { PhoneIcon } from "@/components/icons";
+import { WhatsAppIcon } from "@/components/icons";
 
 function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -34,8 +34,8 @@ export function SiteHeader() {
         className={cn(
           "w-full rounded-b-[2rem] border-b border-navy/10 transition-[background-color,box-shadow,border-color,backdrop-filter] duration-500 ease-[var(--ease-out-soft)] sm:rounded-b-[2.5rem] lg:rounded-b-[3rem]",
           scrolled
-            ? "bg-white/92 shadow-[0_8px_30px_-6px_rgb(11_44_79/0.12)] backdrop-blur-xl"
-            : "bg-white shadow-[0_4px_20px_-4px_rgb(11_44_79/0.06)]"
+            ? "bg-white/92 shadow-[0_8px_30px_-6px_rgb(50_33_26/0.12)] backdrop-blur-xl"
+            : "bg-white shadow-[0_4px_20px_-4px_rgb(50_33_26/0.06)]"
         )}
       >
         <Container>
@@ -83,7 +83,7 @@ export function SiteHeader() {
                   href="/request-a-quote"
                   variant="accent"
                   size="md"
-                  className="shadow-[0_4px_16px_rgba(11,44,79,0.12),0_2px_6px_rgba(195,255,171,0.5)] hover:-translate-y-0.5 hover:shadow-[0_6px_22px_rgba(11,44,79,0.18),0_4px_10px_rgba(195,255,171,0.7)]"
+                  className="shadow-[0_4px_16px_rgba(50,33,26,0.12),0_2px_6px_rgba(229,211,194,0.5)] hover:-translate-y-0.5 hover:shadow-[0_6px_22px_rgba(50,33,26,0.18),0_4px_10px_rgba(229,211,194,0.7)]"
                 >
                   Request a Quote
                 </ButtonLink>
@@ -92,11 +92,13 @@ export function SiteHeader() {
               <SiteSearch />
 
               <a
-                href={site.phoneHref}
-                aria-label={`Call ${site.name} on ${site.phone}`}
-                className="grid size-11 shrink-0 place-items-center rounded-full bg-lime-soft text-navy shadow-soft transition-all duration-300 ease-[var(--ease-out-soft)] hover:-translate-y-0.5 hover:bg-lime-tint hover:shadow-card active:translate-y-0 lg:size-12"
+                href={site.whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Enquire on WhatsApp: ${site.phone}`}
+                className="grid size-11 shrink-0 place-items-center rounded-full bg-[#25d366] text-white shadow-soft transition-all duration-300 ease-[var(--ease-out-soft)] hover:-translate-y-0.5 hover:bg-[#20bd5a] hover:shadow-card active:translate-y-0 lg:size-12"
               >
-                <PhoneIcon className="size-[1.1rem] lg:size-[1.2rem]" />
+                <WhatsAppIcon className="size-[1.2rem] lg:size-[1.3rem]" />
               </a>
 
               <MobileNav pathname={pathname} />

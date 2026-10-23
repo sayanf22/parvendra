@@ -3,12 +3,11 @@ import { Reveal } from "@/components/ui/Reveal";
 import { ButtonLink } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/SectionHeading";
 import { ProductSlider } from "@/components/products/ProductSlider";
-import { signatureProducts } from "@/lib/products";
+import { products } from "@/lib/products";
 
 /**
- * Home page shows only the Breadberry Co.-branded signature line (berries and
- * purees) — not the full 77-line catalogue, which includes unbranded fresh
- * produce and seafood that don't carry the Breadberry pack design.
+ * Home page strip of the full catalogue. Each card shows the photo, the name and
+ * the price from the price list.
  */
 export function ProductRange() {
   return (
@@ -21,20 +20,20 @@ export function ProductRange() {
         <Reveal>
           <div className="flex flex-col gap-5 border-b border-line pb-[clamp(1.25rem,2.5vw,1.75rem)] sm:flex-row sm:items-end sm:justify-between sm:gap-8">
             <div>
-              <Eyebrow>The Breadberry Co. signature line</Eyebrow>
+              <Eyebrow>The catalogue</Eyebrow>
               <h2 id="range-heading" className="mt-3 text-h2">
-                Crafted for Every Creation
+                Featured pieces
               </h2>
             </div>
 
-            <p className="text-muted text-[0.875rem] sm:max-w-[24ch] sm:text-right">
-              {`${signatureProducts.length} Berries & Purees lines quoted to your volume.`}
+            <p className="text-muted text-[0.875rem] sm:max-w-[26ch] sm:text-right">
+              {`${products.length} pieces, each priced in Indian Rupees.`}
             </p>
           </div>
         </Reveal>
 
         <div className="mt-[clamp(1.5rem,3.5vw,2.25rem)]">
-          <ProductSlider products={signatureProducts} />
+          <ProductSlider products={products} />
         </div>
 
         <Reveal className="mt-[clamp(1.75rem,3vw,2.5rem)] flex justify-center">

@@ -1,22 +1,17 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { ButtonLink } from "@/components/ui/Button";
 import { Eyebrow, SectionHeading } from "@/components/ui/SectionHeading";
 import { ProductCard } from "@/components/products/ProductCard";
-import { CheckIcon, ChevronRightIcon } from "@/components/icons";
+import { CheckIcon, ChevronRightIcon, WhatsAppIcon } from "@/components/icons";
 import { products, relatedProducts } from "@/lib/products";
 import { JsonLd } from "@/components/seo/JsonLd";
-import {
-  breadcrumbSchema,
-  canonical,
-  pageMetadata,
-  productSchema,
-} from "@/lib/seo";
+import { breadcrumbSchema, canonical, pageMetadata, productSchema } from "@/lib/seo";
 import { site } from "@/lib/site";
-import Link from "next/link";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -29,18 +24,16 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const product = products.find((item) => item.slug === slug);
   if (!product) return { title: "Product not found" };
 
-  /* Long-tail intent: buyers search the line plus a commercial qualifier and a
-     place, so the title carries the range, the city and the trade context. */
   return {
     ...pageMetadata({
-      title: `${product.name} — Bulk ${product.categoryLabel} Supplier, ${site.city}`,
-      description: `${product.blurb} Supplied in trade packs by ${site.company}, ${site.city}, with delivery across India. ${product.specs[1].value}.`,
+      title: `${product.name} — ${product.priceLabel}`,
+      description: product.blurb,
       path: `/products/${product.slug}`,
       keywords: [
-        `${product.name} supplier`,
-        `${product.name} wholesale price India`,
-        `buy ${product.name} in bulk ${site.city}`,
-        `${product.categoryLabel} supplier India`,
+        `${product.name} price`,
+        `${product.name} price in rupees`,
+        `buy ${product.name} India`,
+        `${product.categoryLabel} India`,
       ],
     }),
     openGraph: {
@@ -49,7 +42,6 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       title: `${product.name} · ${site.name}`,
       description: product.blurb,
       url: canonical(`/products/${product.slug}`),
-      images: [{ url: product.image, alt: product.imageAlt }],
     },
   };
 }
@@ -59,9 +51,6 @@ export default async function ProductPage({ params }: Params) {
   const product = products.find((item) => item.slug === slug);
   if (!product) notFound();
 
-  /* Storage and handling differ per category — fresh produce must never
-     inherit the frozen −18 °C line. */
-  const handling = product.handling;
   const related = relatedProducts(product);
 
   return (
@@ -79,10 +68,7 @@ export default async function ProductPage({ params }: Params) {
                 ].map((crumb, index) => (
                   <li key={crumb.href} className="flex items-center gap-1.5">
                     {index > 0 && (
-                      <ChevronRightIcon
-                        className="size-3 text-muted-soft"
-                        aria-hidden
-                      />
+                      <ChevronRightIcon className="size-3 text-muted-soft" aria-hidden />
                     )}
                     <Link
                       href={crumb.href}
@@ -93,10 +79,7 @@ export default async function ProductPage({ params }: Params) {
                   </li>
                 ))}
                 <li className="flex items-center gap-1.5">
-                  <ChevronRightIcon
-                    className="size-3 text-muted-soft"
-                    aria-hidden
-                  />
+                  <ChevronRightIcon className="size-3 text-muted-soft" aria-hidden />
                   <span aria-current="page" className="text-navy">
                     {product.name}
                   </span>
@@ -106,7 +89,7 @@ export default async function ProductPage({ params }: Params) {
 
             <div className="grid items-center gap-[clamp(2rem,5vw,4rem)] lg:grid-cols-2">
               <div
-                className={`hero-art relative order-first aspect-[196/262] max-h-[32rem] w-full overflow-hidden rounded-hero lg:order-last ${product.tint}`}
+                className={`relative order-first aspect-square max-h-[32rem] w-full overflow-hidden rounded-hero lg:order-last ${product.tint}`}
               >
                 <Image
                   src={product.image}
@@ -121,11 +104,12 @@ export default async function ProductPage({ params }: Params) {
               <div>
                 <Eyebrow>{product.categoryLabel}</Eyebrow>
                 <h1 className="mt-4 text-h1">{product.name}</h1>
-                <p className="text-lead mt-5 max-w-[46ch] text-muted">
-                  {product.blurb}
+                <p className="mt-4 font-display text-[clamp(1.5rem,1.2rem+1vw,2.125rem)] text-navy">
+                  {product.priceLabel}
                 </p>
+                <p className="text-lead mt-4 max-w-[46ch] text-muted">{product.blurb}</p>
 
-                <dl className="mt-8 grid max-w-md grid-cols-3 gap-3">
+                <dl className="mt-8 grid max-w-xl grid-cols-2 gap-3 sm:grid-cols-4">
                   {product.specs.map((spec) => (
                     <div
                       key={spec.label}
@@ -142,7 +126,7 @@ export default async function ProductPage({ params }: Params) {
                 </dl>
 
                 <ul className="mt-8 space-y-2.5">
-                  {handling.map((line) => (
+                  {product.handling.map((line) => (
                     <li key={line} className="flex gap-3 text-muted">
                       <CheckIcon className="mt-0.5 size-5 shrink-0 rounded-full bg-lime-soft p-1 text-navy" />
                       {line}
@@ -151,16 +135,24 @@ export default async function ProductPage({ params }: Params) {
                 </ul>
 
                 <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
+                  <a
+                    href={`${site.whatsappHref}?text=${encodeURIComponent(
+                      `Hello ${site.name}, I would like to enquire about ${product.name} (catalogue no. ${product.ref}, ${product.priceLabel}).`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex h-[3.25rem] items-center justify-center gap-2.5 rounded-pill bg-[#25d366] px-6 text-[0.9375rem] font-semibold text-white shadow-[0_4px_16px_rgba(37,211,102,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#20bd5a]"
+                  >
+                    <WhatsAppIcon className="size-5" />
+                    Enquire on WhatsApp
+                  </a>
                   <ButtonLink
                     href={`/request-a-quote?products=${encodeURIComponent(product.name)}#quote-form`}
-                    variant="accent"
+                    variant="outline"
                     size="lg"
                     withArrow
                   >
                     Request a Quote
-                  </ButtonLink>
-                  <ButtonLink href="/contact" variant="outline" size="lg">
-                    Talk to sales
                   </ButtonLink>
                 </div>
               </div>
@@ -169,27 +161,26 @@ export default async function ProductPage({ params }: Params) {
         </Container>
       </section>
 
-      <section
-        aria-labelledby="related-heading"
-        className="py-[clamp(3rem,7vw,5rem)]"
-      >
-        <Container>
-          <Reveal>
-            <SectionHeading
-              eyebrow="More from the range"
-              title={<span id="related-heading">You may also need</span>}
-            />
-          </Reveal>
+      {related.length > 0 && (
+        <section aria-labelledby="related-heading" className="py-[clamp(3rem,7vw,5rem)]">
+          <Container>
+            <Reveal>
+              <SectionHeading
+                eyebrow="More pieces"
+                title={<span id="related-heading">You may also like</span>}
+              />
+            </Reveal>
 
-          <div className="mt-[clamp(1.75rem,3.5vw,2.5rem)] grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {related.map((item, index) => (
-              <Reveal key={item.slug} delay={index * 70}>
-                <ProductCard product={item} />
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </section>
+            <div className="mt-[clamp(1.75rem,3.5vw,2.5rem)] grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {related.map((item, index) => (
+                <Reveal key={item.slug} delay={index * 70}>
+                  <ProductCard product={item} />
+                </Reveal>
+              ))}
+            </div>
+          </Container>
+        </section>
+      )}
 
       <JsonLd
         data={[

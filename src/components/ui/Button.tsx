@@ -8,10 +8,10 @@ type Size = "sm" | "md" | "lg";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-navy text-white shadow-btn hover:bg-navy-deep hover:shadow-[0_14px_30px_-12px_rgb(11_44_79/0.65)]",
+    "bg-navy text-white shadow-btn hover:bg-navy-deep hover:shadow-[0_14px_30px_-12px_rgb(50_33_26/0.65)]",
   /** Exact light-green conversion path, always paired with dark ink. */
   accent:
-    "bg-lime-soft text-navy shadow-[0_10px_24px_-12px_rgb(195_255_171/0.8)] hover:-translate-y-px hover:bg-lime-soft hover:shadow-[0_14px_30px_-12px_rgb(195_255_171/0.95)]",
+    "bg-lime-soft text-navy shadow-[0_10px_24px_-12px_rgb(229_211_194/0.8)] hover:-translate-y-px hover:bg-lime-soft hover:shadow-[0_14px_30px_-12px_rgb(229_211_194/0.95)]",
   outline:
     "border border-line bg-white text-navy hover:border-lime-soft hover:text-navy hover:shadow-soft",
   ghost: "text-navy hover:bg-lime-mist hover:text-navy",

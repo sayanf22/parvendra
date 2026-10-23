@@ -4,38 +4,39 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { site } from "@/lib/site";
 
 /**
- * The questions buyers actually ask before a first order.
- *
- * Written as real answers, not keyword filler: these are the phrases chefs and
- * procurement managers search, and assistants quote answers like these directly.
+ * Questions visitors ask before they enquire. Each answer uses only what the
+ * catalogue or the enquiry flow already does. Delivery, stock and minimum
+ * quantities are referred to WhatsApp until the client confirms them.
  */
 export const supplyFaqs = [
   {
-    question: "What is the minimum order for frozen berries or purees?",
-    answer: `Minimums depend on the range and your delivery city. Most kitchens start with a trial box before moving to a standing weekly or fortnightly delivery. Message ${site.contact} on ${site.phone} with the lines you need and we will confirm the minimum for your city.`,
+    question: "Are the prices in Indian Rupees?",
+    answer: `Yes. Every piece is priced in Indian Rupees (₹), taken from the ${site.name} price list. Confirm the current price with us on WhatsApp before you order.`,
   },
   {
-    question: "Do you deliver outside Mumbai?",
-    answer: `Yes. We are based in ${site.city} and ship to professional kitchens across India, including Pune, Delhi NCR, Bengaluru, Hyderabad, Chennai, Kolkata, Ahmedabad and Goa. Lead times vary by region, so ask us for a delivery schedule for your city.`,
-  },
-  {
-    question: "How is the cold chain maintained in transit?",
+    question: "How do I place an order?",
     answer:
-      "Frozen lines are held at −18 °C or below and moved in insulated, temperature-logged transport. Fresh produce travels chilled at 2 – 6 °C and is never frozen. Consignments are scheduled around your prep days so stock is not left waiting.",
+      "Open the piece you want, then send an enquiry on WhatsApp with its name or catalogue number. We reply on WhatsApp with availability and the next steps.",
   },
   {
-    question: "Can you supply documentation for audits?",
+    question: "Which finishes are available?",
     answer:
-      "Yes. Origin and batch documentation is issued on request for every consignment, which is what most hotel and QSR audits ask for.",
+      "The collection includes gold and silver pieces. Each product page shows the finish of that piece.",
   },
   {
-    question: "What pack sizes do you supply?",
+    question: "What do the catalogue numbers mean?",
     answer:
-      "Pack sizes are quoted per enquiry rather than published, because trade packs differ by range and by supplier lot. Tell us your monthly volume and we will quote the format that works out cheapest per kilo.",
+      "Each piece has a catalogue number from the price list, from 1 to 6. Quote the number when you enquire, so we can match your request to the right piece.",
   },
   {
-    question: "Are you the same company as Adira Enterprises?",
-    answer: `${site.name} is the signature brand of ${site.company}, the registered parent company. “Adira Enterprises” is a common spelling variant of the company name. The same team supplies Breadberry frozen berries, fruit purees and specialist food-service ingredients.`,
+    question: "Can I order more than one piece?",
+    answer:
+      "Yes. Use the quote form to list the pieces and quantities you need, and we will reply with a quote.",
+  },
+  {
+    question: "Do you deliver to my city?",
+    answer:
+      "Please ask us on WhatsApp. Delivery areas and timings are confirmed for each order.",
   },
 ];
 
@@ -56,7 +57,7 @@ export function FaqSection({
           <SectionHeading
             eyebrow="Before you order"
             title={<span id="faq-heading">{heading}</span>}
-            description="Straight answers on minimums, delivery, cold chain and paperwork."
+            description="Prices, ordering and catalogue numbers, explained."
           />
         </Reveal>
 
@@ -67,7 +68,7 @@ export function FaqSection({
                 <dt className="flex gap-3 font-sans text-[1rem] font-semibold leading-snug text-navy">
                   <span
                     aria-hidden
-                    className="mt-2 size-2 shrink-0 rounded-full bg-[#c3ffab]"
+                    className="mt-2 size-2 shrink-0 rounded-full bg-lime-soft"
                   />
                   {item.question}
                 </dt>

@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useEffect, useState, type FormEvent } from "react";
-import { Button } from "@/components/ui/Button";
 import { Field, inputClass, selectArrow, selectClass } from "@/components/ui/Field";
 import { CheckIcon, WhatsAppIcon } from "@/components/icons";
 import { enquiryLinks } from "@/lib/enquiry";
@@ -10,13 +9,13 @@ import { categories, products } from "@/lib/products";
 import { site } from "@/lib/site";
 
 const volumes = [
-  "Under 25 kg / month",
-  "25 – 100 kg / month",
-  "100 – 500 kg / month",
-  "500 kg+ / month",
+  "1 – 5 pieces",
+  "6 – 20 pieces",
+  "21 – 50 pieces",
+  "More than 50 pieces",
 ];
 
-const frequencies = ["One-off trial", "Monthly", "Fortnightly", "Weekly"];
+const frequencies = ["One-time order", "Repeat order"];
 
 /**
  * Quote form — only product selection is truly required. Everything else is
@@ -84,19 +83,14 @@ export function QuoteForm() {
     });
   };
 
-  const handleEmail = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const draft = getDraft();
-    if (draft) window.location.href = draft.mailto;
-  };
-
-  const handleWhatsApp = () => {
     const draft = getDraft();
     if (draft) window.open(draft.whatsapp, "_blank", "noopener,noreferrer");
   };
 
   return (
-    <form onSubmit={handleEmail} noValidate className="flex flex-col gap-6">
+    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-6">
       {/* ── Product selector (optional) ─────────────────────────────── */}
       <fieldset className="rounded-panel border border-line-soft bg-surface/50 p-4 sm:p-5">
         <legend className="mb-3 text-eyebrow font-semibold uppercase text-blue">
@@ -150,7 +144,7 @@ export function QuoteForm() {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search (e.g. Strawberry, Salmon, Puree…)"
+            placeholder="Search (e.g. Leopard, Vase, Tray…)"
             className={`${inputClass()} bg-white text-[0.8125rem]`}
           />
         </div>
@@ -226,61 +220,57 @@ export function QuoteForm() {
         </legend>
 
         <Field label="Name" htmlFor="name">
-          <input id="name" name="name" type="text" autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} className={inputClass()} placeholder="Aarav Mehta" />
+          <input id="name" name="name" type="text" autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} className={inputClass()} placeholder="Your name" />
         </Field>
 
         <Field label="Business" htmlFor="company">
-          <input id="company" name="company" type="text" autoComplete="organization" value={company} onChange={(e) => setCompany(e.target.value)} className={inputClass()} placeholder="Olive Bistro" />
+          <input id="company" name="company" type="text" autoComplete="organization" value={company} onChange={(e) => setCompany(e.target.value)} className={inputClass()} placeholder="Business or event name" />
         </Field>
 
         <Field label="Email" htmlFor="email">
-          <input id="email" name="email" type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} className={inputClass()} placeholder="chef@yourvenue.com" />
+          <input id="email" name="email" type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} className={inputClass()} placeholder="you@example.com" />
         </Field>
 
         <Field label="Phone" htmlFor="phone">
-          <input id="phone" name="phone" type="tel" autoComplete="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className={inputClass()} placeholder="+91 98765 43210" />
+          <input id="phone" name="phone" type="tel" autoComplete="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className={inputClass()} placeholder="+91 00000 00000" />
         </Field>
 
-        <Field label="Delivery city" htmlFor="city">
-          <input id="city" name="city" type="text" autoComplete="address-level2" value={city} onChange={(e) => setCity(e.target.value)} className={inputClass()} placeholder="Mumbai" />
+        <Field label="City" htmlFor="city">
+          <input id="city" name="city" type="text" autoComplete="address-level2" value={city} onChange={(e) => setCity(e.target.value)} className={inputClass()} placeholder="Your city" />
         </Field>
 
-        <Field label="Volume" htmlFor="volume">
+        <Field label="Quantity" htmlFor="volume">
           <select id="volume" name="volume" value={volume} onChange={(e) => setVolume(e.target.value)} style={selectArrow} className={selectClass()}>
-            <option value="">Monthly volume (optional)</option>
+            <option value="">Number of pieces (optional)</option>
             {volumes.map((o) => <option key={o} value={o}>{o}</option>)}
           </select>
         </Field>
 
-        <Field label="Frequency" htmlFor="frequency">
+        <Field label="Order type" htmlFor="frequency">
           <select id="frequency" name="frequency" value={frequency} onChange={(e) => setFrequency(e.target.value)} style={selectArrow} className={selectClass()}>
-            <option value="">Delivery frequency (optional)</option>
+            <option value="">Order type (optional)</option>
             {frequencies.map((o) => <option key={o} value={o}>{o}</option>)}
           </select>
         </Field>
       </fieldset>
 
-      <Field label="Your message" htmlFor="notes" required hint="What do you need? Products, quantities, delivery city — anything useful.">
-        <textarea id="notes" name="notes" rows={4} required value={notes} onChange={(e) => { setNotes(e.target.value); setShowMessageError(false); }} className={`${inputClass(showMessageError ? "required" : undefined)} resize-y`} placeholder="We need 50 kg of IQF strawberries and 20 kg of blueberry puree delivered weekly to Mumbai." />
+      <Field label="Your message" htmlFor="notes" required hint="Which pieces, how many, and any questions you have.">
+        <textarea id="notes" name="notes" rows={4} required value={notes} onChange={(e) => { setNotes(e.target.value); setShowMessageError(false); }} className={`${inputClass(showMessageError ? "required" : undefined)} resize-y`} placeholder="We would like 2 Golden Deer Figurines and 1 Gold Sunburst Vase for an event." />
       </Field>
 
       {/* ── Actions ──────────────────────────────────────────────────── */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-        <Button type="submit" size="lg" withArrow className="w-full sm:w-auto">
-          Send Enquiry
-        </Button>
         <button
-          type="button"
-          onClick={handleWhatsApp}
+          type="submit"
           className="inline-flex h-[3.25rem] w-full items-center justify-center gap-2.5 rounded-pill bg-[#25d366] px-6 text-[0.9375rem] font-semibold text-white shadow-[0_4px_16px_rgba(37,211,102,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#20bd5a] sm:w-auto"
         >
           <WhatsAppIcon className="size-5" />
-          WhatsApp
+          Send Quote Request on WhatsApp
         </button>
       </div>
 
       <p className="text-[0.75rem] text-muted-soft">
-        Opens your email or WhatsApp app with a pre-filled draft. Nothing is sent until you confirm.
+        Opens WhatsApp with your request filled in. Nothing is sent until you press send in WhatsApp.
       </p>
     </form>
   );

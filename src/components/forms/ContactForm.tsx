@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, type FormEvent } from "react";
-import { Button } from "@/components/ui/Button";
 import { Field, inputClass } from "@/components/ui/Field";
 import { WhatsAppIcon } from "@/components/icons";
 import { enquiryLinks } from "@/lib/enquiry";
@@ -16,39 +15,30 @@ function valuesFrom(form: HTMLFormElement) {
 }
 
 /**
- * Simple enquiry form — only the message is required. Every other field is
- * optional so visitors can send a quick question without friction.
+ * Enquiry form. Only the message is required. The enquiry is handed to WhatsApp
+ * with the details pre-filled, and nothing is sent until the visitor confirms
+ * in WhatsApp.
  */
 export function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null);
 
-  const getDraft = () => {
+  const openWhatsApp = (event?: FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
     const form = formRef.current;
-    if (!form) return null;
+    if (!form) return;
 
-    /* Only require a message — the rest is bonus context. */
     const message = form.querySelector<HTMLTextAreaElement>("#message");
     if (!message || !message.value.trim()) {
       message?.focus();
-      return null;
+      return;
     }
 
-    return enquiryLinks(`Enquiry via ${site.name}`, valuesFrom(form));
-  };
-
-  const openEmail = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const draft = getDraft();
-    if (draft) window.location.href = draft.mailto;
-  };
-
-  const openWhatsApp = () => {
-    const draft = getDraft();
-    if (draft) window.open(draft.whatsapp, "_blank", "noopener,noreferrer");
+    const draft = enquiryLinks(`Enquiry via ${site.name} website`, valuesFrom(form));
+    window.open(draft.whatsapp, "_blank", "noopener,noreferrer");
   };
 
   return (
-    <form ref={formRef} onSubmit={openEmail} className="flex flex-col gap-5">
+    <form ref={formRef} onSubmit={openWhatsApp} className="flex flex-col gap-5">
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Your name" htmlFor="name">
           <input
@@ -57,40 +47,40 @@ export function ContactForm() {
             type="text"
             autoComplete="name"
             className={inputClass()}
-            placeholder="Aarav Mehta"
+            placeholder="Your name"
           />
         </Field>
 
-        <Field label="Business" htmlFor="company">
+        <Field label="Business (optional)" htmlFor="company">
           <input
             id="company"
             name="company"
             type="text"
             autoComplete="organization"
             className={inputClass()}
-            placeholder="Olive Bistro"
+            placeholder="Business or event name"
           />
         </Field>
 
-        <Field label="Email" htmlFor="email">
+        <Field label="Email (optional)" htmlFor="email">
           <input
             id="email"
             name="email"
             type="email"
             autoComplete="email"
             className={inputClass()}
-            placeholder="chef@yourvenue.com"
+            placeholder="you@example.com"
           />
         </Field>
 
-        <Field label="Phone" htmlFor="phone">
+        <Field label="Phone (optional)" htmlFor="phone">
           <input
             id="phone"
             name="phone"
             type="tel"
             autoComplete="tel"
             className={inputClass()}
-            placeholder="+91 98765 43210"
+            placeholder="+91 00000 00000"
           />
         </Field>
       </div>
@@ -99,7 +89,7 @@ export function ContactForm() {
         label="Your message"
         htmlFor="message"
         required
-        hint="Products you need, quantities, delivery city — anything useful."
+        hint="Which pieces you are interested in, and any questions you have."
       >
         <textarea
           id="message"
@@ -107,27 +97,23 @@ export function ContactForm() {
           rows={4}
           required
           className={`${inputClass()} resize-y`}
-          placeholder="We run three cafés in Mumbai and need roughly 40 kg of frozen berries a month…"
+          placeholder="I would like to know the availability of the Golden Leopard Figurine."
         />
       </Field>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-        <Button type="submit" size="lg" withArrow className="w-full sm:w-auto">
-          Send Enquiry
-        </Button>
         <button
-          type="button"
-          onClick={openWhatsApp}
+          type="submit"
           className="inline-flex h-[3.25rem] w-full items-center justify-center gap-2.5 rounded-pill bg-[#25d366] px-6 text-[0.9375rem] font-semibold text-white shadow-[0_4px_16px_rgba(37,211,102,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#20bd5a] sm:w-auto"
         >
           <WhatsAppIcon className="size-5" />
-          WhatsApp
+          Send Enquiry on WhatsApp
         </button>
       </div>
 
       <p className="text-[0.75rem] text-muted-soft">
-        Opens your email or WhatsApp app with a pre-filled draft. Nothing is
-        sent until you confirm.
+        Opens WhatsApp with your enquiry filled in. Nothing is sent until you
+        press send in WhatsApp.
       </p>
     </form>
   );

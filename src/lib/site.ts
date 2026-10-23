@@ -1,55 +1,31 @@
+/**
+ * Brand and contact details for Indian Invention Boy.
+ *
+ * Every enquiry channel on the site opens WhatsApp, so the enquiry number below
+ * is the only contact detail the site needs. Change `whatsapp` here and every
+ * button, form and structured-data entry follows.
+ */
 export const site = {
-  /** Consumer-facing brand this site represents. */
-  name: "Breadberry Co.",
-  /** Parent company. Breadberry Co. is its signature brand. */
-  company: "Adhira Enterprises",
-  /**
-   * Spellings people actually search for. "Adira Enterprises" is a common
-   * variant of the registered name, so both are declared as entity aliases and
-   * used in copy/metadata — searching either should find this site.
-   */
-  alternateNames: [
-    "Adira Enterprises",
-    "Adhira Enterprise",
-    "Breadberry",
-    "Breadberry by Adhira Enterprises",
-    "Breadberry by Adira Enterprises",
-  ],
-  founded: "2020",
-  founder: "Mrs. Sonal Abhishek Yerunkar",
-  city: "Mumbai",
-  region: "Maharashtra",
-  country: "IN",
-  /** Machine-readable form of `hours`, for opening-hours structured data. */
-  openingHours: "Mo-Sa 09:00-18:30",
-  tagline: "Premium Frozen Berries & Purees",
+  /** Brand name, as written on the logo. */
+  name: "Indian Invention Boy",
+  tagline: "Gold & Silver Home Décor",
   description:
-    "Breadberry Co., a signature brand of Adhira Enterprises, supplies premium frozen berries and fruit purees to Mumbai's 5-star hotels, fine-dining restaurants, premium confectioneries and artisanal bakers.",
-  clientsServed: "1000+",
-
-  /** Named contact for every enquiry channel on the site. */
-  contact: "Abhishek Yerunkar",
-  phone: "8108187667",
-  phoneHref: "tel:+918108187667",
-  /** Enquiries hand off to this WhatsApp thread. Digits only, no spaces. */
+    "Indian Invention Boy offers gold and silver décor pieces: figurines, vases, flower stands and serving trays. Every piece is listed with its price in Indian Rupees, and enquiries are handled on WhatsApp.",
+  /** TODO: set to the live domain before launch. Used for canonical URLs and the sitemap. */
+  url: "http://localhost:3000",
+  /** Enquiry number, digits only with country code. */
   whatsapp: "918108187667",
   whatsappHref: "https://wa.me/918108187667",
-  // Primary mailbox for sales and order enquiries.
-  email: "sales@breadberry.co.in",
-  address: "G/3, Bhagwanti Niwas, T H Kataria Marg, Mahim, Mumbai, Maharashtra 400016",
-  hours: "Mon–Sat · 9:00 – 18:30 IST",
-  url: "https://breadberry.co.in",
+  /** Display form of the enquiry number. */
+  phone: "+91 81081 87667",
+  currency: "INR",
+  currencySymbol: "₹",
+  country: "IN",
+  language: "en-IN",
 } as const;
 
-/**
- * Social profiles. TODO: replace with the real handles — the footer row
- * renders only while this array has entries, so clear it rather than
- * shipping dead links.
- */
-export const social: { label: string; href: string }[] = [
-  { label: "Instagram", href: "https://www.instagram.com/adhiraent.breadberryco" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/adhira-enterprisesbreadberry/" },
-];
+/** Social profiles. Empty until the client supplies real handles, so the footer shows none. */
+export const social: { label: string; href: string }[] = [];
 
 export type NavLink = { label: string; href: string };
 
@@ -61,30 +37,12 @@ export const navLinks: NavLink[] = [
   { label: "Contact", href: "/contact" },
 ];
 
-/**
- * Kitchens, hotel groups, cafés and retail brands supplied by
- * Adhira Enterprises. Ordered to alternate long and short names so the
- * single marquee row reads with an even rhythm.
- *
- * Rendered as type — replace with vector logos once licensed artwork exists.
- */
-export const clients = [
-  "Taj Hotels",
-  "Theobroma",
-  "JW Marriott",
-  "Blue Tokai",
-  "Oberoi",
-  "PAUL",
-  "Hyatt",
-  "Pizza Express",
-  "Fortune Park Lakecity",
-  "Merwans",
-  "Bastian",
-  "Parsi Dairy Farm",
-  "Olive Bar & Cafe",
-  "Milky Mist",
-  "Mainland China",
-  "Mapro",
-  "Mizu",
-  "EVE",
+/** Words that scroll across the home page band. Plain text only, no logos. */
+export const marqueeItems = [
+  "Golden Figurines",
+  "Gold & Silver Finishes",
+  "Vases & Flower Stands",
+  "Silver Serving Trays",
+  "Prices in Indian Rupees",
+  "Enquire on WhatsApp",
 ] as const;

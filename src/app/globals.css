@@ -1,0 +1,604 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Design tokens
+   ========================================================================== */
+@theme {
+  /* Brand palette */
+  --color-navy: #0b2c4f;
+  --color-navy-deep: #06203c;
+  --color-ink: #102a45;
+  --color-blue: #1e7fc9;
+  --color-blue-mid: #4c9edd;
+  --color-blue-soft: #eaf2fc;
+  --color-blue-mist: #f4f9fd;
+  --color-berry: #c0384f;
+
+  /* ── Light green family ─────────────────────────────────────────────────
+     #c3ffab is the single green accent across the site. It is intentionally
+     used as a fill, rule or highlight with navy ink; it is too light for body
+     text on white. The pale steps support larger low-contrast surfaces. */
+  --color-lime-soft: #c3ffab;
+  --color-lime-tint: #e6f8dc;
+  --color-lime-panel: #eef8e8;
+  --color-lime-mist: #f2fbee;
+
+  /* Legacy semantic aliases keep existing utilities consistent while ensuring
+     no dark emerald survives in authored UI. Foregrounds on light surfaces
+     should use navy rather than these accent aliases. */
+  --color-green: var(--color-lime-soft);
+  --color-green-deep: var(--color-lime-soft);
+  --color-green-deeper: var(--color-lime-soft);
+  --color-forest: var(--color-lime-soft);
+  --color-forest-deep: var(--color-lime-soft);
+  --color-forest-mid: var(--color-lime-soft);
+  --color-mint: var(--color-lime-soft);
+
+  /* Near-black slab (neutral, not navy). Cream clears 17:1 here. */
+  --color-night: #111113;
+  --color-night-soft: #17171a;
+  --color-cream: #f8f4ea;
+  --color-cream-soft: #fdfbf5;
+
+  /* Neutrals */
+  --color-muted: #5c7386;
+  --color-muted-soft: #8b9bab;
+  --color-line: #e4eaf0;
+  --color-line-soft: #edf1f6;
+  --color-surface: #f6f8fb;
+  --color-surface-2: #fbfcfe;
+
+  /* Product tints */
+  --color-tint-blueberry: #e9f1fb;
+  --color-tint-raspberry: #fdebf1;
+  --color-tint-strawberry: #fdeeeb;
+  --color-tint-passion: #fdf4d8;
+  /* Category tints for the wider catalogue — same lightness as the berries so
+     cards sit level next to each other in a mixed grid. */
+  --color-tint-leaf: #eef6ea;
+  --color-tint-sand: #f8f3e8;
+  --color-tint-ocean: #eaf2f8;
+
+  /* Typography — editorial serif for display, grotesque for UI */
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-newsreader), ui-serif, Georgia, serif;
+
+  /* Fluid type scale */
+  --text-eyebrow: clamp(0.625rem, 0.595rem + 0.15vw, 0.75rem);
+  --text-eyebrow--line-height: 1.4;
+  --text-eyebrow--letter-spacing: 0.15em;
+
+  --text-h1: clamp(1.9375rem, 1.12rem + 3.6vw, 4.375rem);
+  --text-h1--line-height: 1.08;
+  --text-h1--letter-spacing: -0.018em;
+
+  --text-h2: clamp(1.625rem, 1.24rem + 1.75vw, 2.875rem);
+  --text-h2--line-height: 1.14;
+  --text-h2--letter-spacing: -0.015em;
+
+  --text-h3: clamp(1.125rem, 1.05rem + 0.36vw, 1.375rem);
+  --text-h3--line-height: 1.3;
+  --text-h3--letter-spacing: -0.008em;
+
+  --text-lead: clamp(0.9375rem, 0.9rem + 0.28vw, 1.125rem);
+  --text-lead--line-height: 1.72;
+
+  --text-body: clamp(0.875rem, 0.855rem + 0.13vw, 0.9688rem);
+  --text-body--line-height: 1.7;
+
+  /* Radii */
+  --radius-pill: 999px;
+  --radius-card: 1.375rem;
+  --radius-panel: 1.75rem;
+  --radius-hero: 2rem;
+
+  /* Elevation */
+  --shadow-soft: 0 1px 2px rgb(11 44 79 / 0.04), 0 8px 24px -10px rgb(11 44 79 / 0.09);
+  --shadow-card: 0 1px 2px rgb(11 44 79 / 0.04), 0 20px 44px -20px rgb(11 44 79 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(11 44 79 / 0.05), 0 34px 64px -24px rgb(11 44 79 / 0.26);
+  --shadow-btn: 0 10px 24px -12px rgb(11 44 79 / 0.6);
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+@layer base {
+  * {
+    min-width: 0;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6.5rem;
+  }
+
+  body {
+    background-color: #fff;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    font-feature-settings: "cv05" 1;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* `clip` rather than `hidden` so this never becomes a scroll container
+       and breaks the sticky header. Supported from Safari 16 / Chrome 90,
+       which is wider than Tailwind v4's own baseline, so it needs no
+       fallback — Lightning CSS strips one anyway. */
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--color-navy);
+    font-weight: 400;
+    font-optical-sizing: auto;
+    /* `pretty` avoids orphans without redistributing explicit line breaks,
+       which `balance` does — that was fragmenting the hero headline. */
+    text-wrap: pretty;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--color-blue);
+    color: #fff;
+  }
+
+  img,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* ==========================================================================
+   Components
+   ========================================================================== */
+@layer components {
+  /* ── Elevated surface with a gradient hairline that lights up on hover ──── */
+  .card-surface {
+    /* Overridable per card so a tinted surface keeps its own accent rather
+       than inheriting the default blue. */
+    --card-ring: rgb(30 127 201 / 0.55);
+    --card-ring-mid: rgb(76 158 221 / 0.22);
+    --card-glow: rgb(30 127 201 / 0.07);
+
+    position: relative;
+    isolation: isolate;
+    border-radius: var(--radius-card);
+    background: #fff;
+    box-shadow: var(--shadow-soft);
+    transition:
+      transform 0.55s var(--ease-out-soft),
+      box-shadow 0.55s var(--ease-out-soft);
+  }
+
+  /* Gradient border, drawn as a masked ring. Painted above the content so
+     full-bleed media inside the card cannot cover it. */
+  .card-surface::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      150deg,
+      var(--color-line) 0%,
+      var(--color-line) 45%,
+      var(--color-line) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    transition: background 0.55s var(--ease-out-soft);
+  }
+
+  /* Soft spotlight that fades in from the top of the card */
+  .card-surface::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    opacity: 0;
+    background: radial-gradient(
+      120% 80% at 20% 0%,
+      var(--card-glow) 0%,
+      transparent 62%
+    );
+    transition: opacity 0.55s var(--ease-out-soft);
+  }
+
+  .card-surface:hover,
+  .card-surface:focus-within {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-card);
+  }
+
+  .card-surface:hover::before,
+  .card-surface:focus-within::before {
+    background: linear-gradient(
+      150deg,
+      var(--card-ring) 0%,
+      var(--card-ring-mid) 42%,
+      var(--color-line) 100%
+    );
+  }
+
+  .card-surface:hover::after,
+  .card-surface:focus-within::after {
+    opacity: 1;
+  }
+
+  /* ── Icon tile ─────────────────────────────────────────────────────────── */
+  .icon-tile {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 1.125rem;
+    transition:
+      transform 0.55s var(--ease-out-soft),
+      box-shadow 0.55s var(--ease-out-soft);
+  }
+
+  .icon-tile::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 1px currentColor;
+    opacity: 0.12;
+  }
+
+  .group:hover .icon-tile {
+    transform: translateY(-2px) scale(1.06);
+  }
+
+  /* ── Light sweep across a card on hover ────────────────────────────────── */
+  .sheen {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .sheen::before {
+    content: "";
+    position: absolute;
+    top: -60%;
+    bottom: -60%;
+    left: -35%;
+    width: 28%;
+    transform: translateX(-260%) rotate(14deg);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(255 255 255 / 0.5),
+      transparent
+    );
+    transition: transform 1.1s var(--ease-out-soft);
+  }
+
+  .group:hover .sheen::before,
+  .group\/btn:hover .sheen::before {
+    transform: translateX(560%) rotate(14deg);
+  }
+}
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+@layer utilities {
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sr-only-focusable:not(:focus):not(:focus-within) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Ambient wash behind the hero, mirroring the reference artwork */
+  .hero-wash {
+    background:
+      radial-gradient(
+        58% 54% at 88% 14%,
+        rgb(211 232 250 / 0.85) 0%,
+        rgb(211 232 250 / 0) 68%
+      ),
+      radial-gradient(
+        44% 42% at 70% 58%,
+        rgb(252 226 234 / 0.6) 0%,
+        rgb(252 226 234 / 0) 70%
+      ),
+      radial-gradient(
+        66% 56% at 8% 2%,
+        rgb(238 245 252 / 0.8) 0%,
+        rgb(238 245 252 / 0) 66%
+      );
+  }
+
+  /* Fades a horizontally scrolling strip out at both ends.
+     `no-repeat` matters: without it the gradient tiles and overflowing
+     track content stays visible outside the mask box. */
+  .edge-fade {
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0,
+      #000 7%,
+      #000 93%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0,
+      #000 7%,
+      #000 93%,
+      transparent 100%
+    );
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+}
+
+/* ==========================================================================
+   Motion
+   ========================================================================== */
+@keyframes bb-page-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes bb-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes bb-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bb-panel-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes bb-product-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes bb-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -12px, 0);
+  }
+}
+
+@keyframes bb-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.page-enter {
+  animation: bb-page-in 0.55s var(--ease-out-soft) both;
+}
+
+.panel-enter {
+  animation: bb-panel-in 0.4s var(--ease-out-soft) both;
+}
+
+/* Category changes remount the filtered grid. A short, capped stagger lets
+   products resolve in sequence without delaying long catalogue ranges. */
+.product-grid-item {
+  animation: bb-product-in 0.52s var(--ease-out-soft) both;
+  animation-delay: calc(var(--product-index, 0) * 38ms);
+}
+
+.product-count-enter {
+  animation: bb-fade 0.35s var(--ease-out-soft) 120ms both;
+}
+
+.hero-item {
+  animation: bb-rise 0.8s var(--ease-out-soft) both;
+  animation-delay: var(--d, 0ms);
+}
+
+.hero-art {
+  animation: bb-fade 1s var(--ease-out-soft) both;
+  animation-delay: 120ms;
+}
+
+/* ── Blessing animations ───────────────────────────────────────────────── */
+
+.blessing-text {
+  animation: bb-blessing-text 1.2s var(--ease-out-soft) both;
+}
+
+.blessing-icon {
+  animation: bb-blessing-icon 1.4s var(--ease-out-soft) 0.3s both;
+}
+
+@keyframes bb-blessing-text {
+  from {
+    opacity: 0;
+    letter-spacing: 0.4em;
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    letter-spacing: 0.16em;
+    filter: blur(0);
+  }
+}
+
+@keyframes bb-blessing-icon {
+  0% {
+    opacity: 0;
+    transform: scale(0.4) rotate(-15deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.1) rotate(3deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.float-slow {
+  animation: bb-float 9s ease-in-out infinite;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: bb-marquee var(--marquee-duration, 42s) linear infinite;
+  /* Promote once rather than per-frame: keeps long tracks smooth on phones. */
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 639px) {
+  .marquee-track {
+    animation-duration: var(--marquee-duration-sm, var(--marquee-duration, 42s));
+  }
+}
+
+.marquee-track:hover,
+.marquee-track:focus-within {
+  animation-play-state: paused;
+}
+
+/* Scroll reveal, driven by <Reveal /> */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  transition:
+    opacity 0.7s var(--ease-out-soft),
+    transform 0.7s var(--ease-out-soft);
+  transition-delay: var(--d, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Static, wrapped grid instead of a loop — and drop the duplicate copy. */
+  .marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .marquee-track > [aria-hidden="true"] {
+    display: none;
+  }
+}

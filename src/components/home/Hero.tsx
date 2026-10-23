@@ -1,6 +1,7 @@
 import type { CSSProperties, ReactNode } from "react";
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
+import { WhatsAppButton } from "@/components/ui/WhatsApp";
 import { Eyebrow } from "@/components/ui/SectionHeading";
 import { CheckIcon, SparkleIcon, WhatsAppIcon } from "@/components/icons";
 import { site } from "@/lib/site";
@@ -21,7 +22,7 @@ const highlights = [
   {
     icon: WhatsAppIcon,
     title: "WhatsApp",
-    note: "Quick enquiries",
+    note: "Enquire directly",
     ring: "bg-lime-soft text-navy",
   },
 ];
@@ -88,9 +89,9 @@ export function Hero() {
                 >
                   View Products
                 </ButtonLink>
-                <ButtonLink href={site.whatsappHref} variant="outline" size="lg">
+                <WhatsAppButton tone="outline" size="lg">
                   Enquire on WhatsApp
-                </ButtonLink>
+                </WhatsAppButton>
               </div>
             </HeroItem>
           </div>

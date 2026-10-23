@@ -2,8 +2,8 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { ButtonLink } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/SectionHeading";
-import { SparkleIcon, WhatsAppIcon, CheckIcon, UsersIcon } from "@/components/icons";
-import { site } from "@/lib/site";
+import { WhatsAppIconLink } from "@/components/ui/WhatsApp";
+import { SparkleIcon, CheckIcon, UsersIcon } from "@/components/icons";
 
 /** Collection chips, shown above the call to action. */
 const chips = [
@@ -52,8 +52,8 @@ export function QuoteCta() {
             </h2>
 
             <p className="text-lead mt-4 max-w-[50ch] text-muted">
-              Tell us which pieces you want and how many. Your enquiry goes to
-              WhatsApp, and we reply with availability and the total.
+              Tell us which pieces you are interested in and how many. Your
+              enquiry opens in WhatsApp with the details filled in.
             </p>
 
             <div className="mt-[clamp(1.75rem,3vw,2.25rem)] flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
@@ -66,15 +66,7 @@ export function QuoteCta() {
                 Request a Quote
               </ButtonLink>
 
-              <a
-                href={site.whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex h-[3.25rem] items-center justify-center gap-2.5 rounded-pill border border-lime-soft bg-white/60 px-6 text-[0.9375rem] font-medium text-navy transition-[background-color,border-color] duration-300 hover:border-lime-soft hover:bg-white"
-              >
-                <WhatsAppIcon className="size-[1.05rem] text-navy" />
-                {site.phone}
-              </a>
+              <WhatsAppIconLink tone="outline" size="lg" />
             </div>
           </div>
         </Reveal>

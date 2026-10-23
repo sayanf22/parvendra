@@ -23,11 +23,11 @@ const steps = [
   },
   {
     title: "Send an enquiry",
-    body: "Send the piece name or catalogue number to us on WhatsApp.",
+    body: "Send the piece name or catalogue number on WhatsApp.",
   },
   {
-    title: "Confirm your order",
-    body: "We reply on WhatsApp with availability and the next steps.",
+    title: "Continue on WhatsApp",
+    body: "Your message opens in WhatsApp. Nothing is sent until you press send.",
   },
 ];
 

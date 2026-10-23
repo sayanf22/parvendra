@@ -2,7 +2,7 @@
 
 import { useRef, type FormEvent } from "react";
 import { Field, inputClass } from "@/components/ui/Field";
-import { WhatsAppIcon } from "@/components/icons";
+import { WhatsAppSubmitButton } from "@/components/ui/WhatsApp";
 import { enquiryLinks } from "@/lib/enquiry";
 import { site } from "@/lib/site";
 
@@ -80,7 +80,7 @@ export function ContactForm() {
             type="tel"
             autoComplete="tel"
             className={inputClass()}
-            placeholder="+91 00000 00000"
+            placeholder="Your phone number"
           />
         </Field>
       </div>
@@ -97,18 +97,14 @@ export function ContactForm() {
           rows={4}
           required
           className={`${inputClass()} resize-y`}
-          placeholder="I would like to know the availability of the Golden Leopard Figurine."
+          placeholder="I would like to enquire about the Golden Leopard Figurine (catalogue no. 1)."
         />
       </Field>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-        <button
-          type="submit"
-          className="inline-flex h-[3.25rem] w-full items-center justify-center gap-2.5 rounded-pill bg-[#25d366] px-6 text-[0.9375rem] font-semibold text-white shadow-[0_4px_16px_rgba(37,211,102,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#20bd5a] sm:w-auto"
-        >
-          <WhatsAppIcon className="size-5" />
+        <WhatsAppSubmitButton tone="solid" size="lg" className="w-full sm:w-auto">
           Send Enquiry on WhatsApp
-        </button>
+        </WhatsAppSubmitButton>
       </div>
 
       <p className="text-[0.75rem] text-muted-soft">

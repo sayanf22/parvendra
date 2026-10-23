@@ -2,31 +2,33 @@ import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/layout/PageHero";
 import { QuoteForm } from "@/components/forms/QuoteForm";
-import { CheckIcon, WhatsAppIcon } from "@/components/icons";
+import { CheckIcon } from "@/components/icons";
+import { WhatsAppIconLink } from "@/components/ui/WhatsApp";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: `Request a Quote: ${site.name}`,
-  description: `Request a quote for gold and silver décor pieces. List the pieces and quantities you need, and ${site.name} replies on WhatsApp.`,
+  description:
+    "Request a quote for gold and silver décor pieces. List the pieces and quantities you need. Your request opens in WhatsApp.",
   path: "/request-a-quote",
-  keywords: ["bulk gold decor quote India", "request quote decor pieces"],
+  keywords: ["gold decor quote request", "request quote decor pieces"],
 });
 
 const steps = [
   "Choose the pieces and quantities you need",
   "Send the request, which opens in WhatsApp",
-  "We reply on WhatsApp with availability and your quote",
+  "Press send in WhatsApp when you are ready",
 ];
 
 export default function RequestQuotePage() {
   return (
     <>
       <PageHero
-        eyebrow="Bulk enquiries"
+        eyebrow="Quote request"
         title="Request a Quote"
-        description={`List the pieces and quantities you need. Your request opens in WhatsApp, and we reply there.`}
+        description="List the pieces and quantities you need. Your request opens in WhatsApp."
         crumbs={[{ label: "Home", href: "/" }, { label: "Request a Quote" }]}
       />
 
@@ -54,21 +56,12 @@ export default function RequestQuotePage() {
 
               <div className="rounded-panel border border-line-soft bg-white p-[clamp(1.25rem,2.5vw,1.75rem)] shadow-soft">
                 <h2 className="font-sans text-[1.0625rem] font-semibold leading-snug text-navy">
-                  Prefer to talk?
+                  Prefer to chat?
                 </h2>
-                <ul className="mt-4 space-y-3.5">
-                  <li>
-                    <a
-                      href={site.whatsappHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex min-h-11 items-center gap-3 text-muted transition-colors duration-300 hover:text-navy"
-                    >
-                      <WhatsAppIcon className="size-4 shrink-0 text-navy" />
-                      WhatsApp {site.phone}
-                    </a>
-                  </li>
-                </ul>
+                <div className="mt-4 flex items-center gap-3">
+                  <WhatsAppIconLink tone="solid" />
+                  <p className="text-muted">Open a WhatsApp chat instead of the form.</p>
+                </div>
               </div>
             </aside>
           </div>

@@ -4,13 +4,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/cn";
-import { navLinks, site } from "@/lib/site";
+import { navLinks } from "@/lib/site";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/layout/Logo";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { SiteSearch } from "@/components/layout/SiteSearch";
-import { WhatsAppIcon } from "@/components/icons";
+import { WhatsAppIconLink } from "@/components/ui/WhatsApp";
 
 function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -91,15 +91,7 @@ export function SiteHeader() {
 
               <SiteSearch />
 
-              <a
-                href={site.whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Enquire on WhatsApp: ${site.phone}`}
-                className="grid size-11 shrink-0 place-items-center rounded-full bg-[#25d366] text-white shadow-soft transition-all duration-300 ease-[var(--ease-out-soft)] hover:-translate-y-0.5 hover:bg-[#20bd5a] hover:shadow-card active:translate-y-0 lg:size-12"
-              >
-                <WhatsAppIcon className="size-[1.2rem] lg:size-[1.3rem]" />
-              </a>
+              <WhatsAppIconLink tone="solid" />
 
               <MobileNav pathname={pathname} />
             </div>

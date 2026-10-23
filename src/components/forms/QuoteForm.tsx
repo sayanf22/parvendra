@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { useEffect, useState, type FormEvent } from "react";
 import { Field, inputClass, selectArrow, selectClass } from "@/components/ui/Field";
-import { CheckIcon, WhatsAppIcon } from "@/components/icons";
+import { CheckIcon } from "@/components/icons";
+import { WhatsAppSubmitButton } from "@/components/ui/WhatsApp";
 import { enquiryLinks } from "@/lib/enquiry";
 import { categories, products } from "@/lib/products";
 import { site } from "@/lib/site";
@@ -208,7 +209,7 @@ export function QuoteForm() {
 
         {showMessageError && (
           <p role="alert" className="mt-3 text-[0.75rem] font-medium text-berry">
-            Please describe what you need so we can prepare your quote.
+            Please add a message before sending.
           </p>
         )}
       </fieldset>
@@ -232,7 +233,7 @@ export function QuoteForm() {
         </Field>
 
         <Field label="Phone" htmlFor="phone">
-          <input id="phone" name="phone" type="tel" autoComplete="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className={inputClass()} placeholder="+91 00000 00000" />
+          <input id="phone" name="phone" type="tel" autoComplete="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className={inputClass()} placeholder="Your phone number" />
         </Field>
 
         <Field label="City" htmlFor="city">
@@ -255,18 +256,14 @@ export function QuoteForm() {
       </fieldset>
 
       <Field label="Your message" htmlFor="notes" required hint="Which pieces, how many, and any questions you have.">
-        <textarea id="notes" name="notes" rows={4} required value={notes} onChange={(e) => { setNotes(e.target.value); setShowMessageError(false); }} className={`${inputClass(showMessageError ? "required" : undefined)} resize-y`} placeholder="We would like 2 Golden Deer Figurines and 1 Gold Sunburst Vase for an event." />
+        <textarea id="notes" name="notes" rows={4} required value={notes} onChange={(e) => { setNotes(e.target.value); setShowMessageError(false); }} className={`${inputClass(showMessageError ? "required" : undefined)} resize-y`} placeholder="We are interested in 2 Golden Deer Figurines and 1 Gold Sunburst Vase." />
       </Field>
 
       {/* ── Actions ──────────────────────────────────────────────────── */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-        <button
-          type="submit"
-          className="inline-flex h-[3.25rem] w-full items-center justify-center gap-2.5 rounded-pill bg-[#25d366] px-6 text-[0.9375rem] font-semibold text-white shadow-[0_4px_16px_rgba(37,211,102,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#20bd5a] sm:w-auto"
-        >
-          <WhatsAppIcon className="size-5" />
+        <WhatsAppSubmitButton tone="solid" size="lg" className="w-full sm:w-auto">
           Send Quote Request on WhatsApp
-        </button>
+        </WhatsAppSubmitButton>
       </div>
 
       <p className="text-[0.75rem] text-muted-soft">

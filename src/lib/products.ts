@@ -131,7 +131,7 @@ function define({ slug, ref, name, category, price, priceLabel, finish }: Seed):
     image: `/products/${slug}.webp`,
     imageAlt: `${name} from the ${categoryLabel} collection`,
     tint: "bg-surface",
-    blurb: `${name}, priced at ${priceLabel}. Enquire on WhatsApp about availability.`,
+    blurb: `${name}, priced at ${priceLabel}. Enquire on WhatsApp.`,
     specs: [
       { label: "Price", value: priceLabel },
       { label: "Finish", value: finish },
@@ -140,7 +140,7 @@ function define({ slug, ref, name, category, price, priceLabel, finish }: Seed):
     ],
     handling: [
       "Prices are listed in Indian Rupees (₹), as shown in the price list.",
-      "Send an enquiry on WhatsApp to check availability and place an order.",
+      "Send an enquiry on WhatsApp with the piece name or catalogue number.",
     ],
   };
 }

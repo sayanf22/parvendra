@@ -10,11 +10,11 @@ export default function NotFound() {
         <div className="flex min-h-[58vh] flex-col items-start justify-center py-[clamp(3rem,8vw,6rem)]">
           <Eyebrow>Error 404</Eyebrow>
           <h1 className="mt-4 max-w-[20ch] text-h1">
-            This page has been <span className="text-blue">defrosted.</span>
+            This page could not be <span className="text-blue">found.</span>
           </h1>
           <p className="text-lead mt-5 max-w-[46ch] text-muted">
-            The link you followed no longer exists. Our product range and quote
-            desk are both a click away.
+            The link you followed does not exist. The catalogue and the quote
+            form are a click away.
           </p>
           <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
             <ButtonLink href="/" size="lg" withArrow>

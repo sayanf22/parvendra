@@ -5,12 +5,13 @@ import { PageHero } from "@/components/layout/PageHero";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
-import { WhatsAppIcon, SparkleIcon } from "@/components/icons";
+import { SparkleIcon } from "@/components/icons";
+import { WhatsAppIconLink } from "@/components/ui/WhatsApp";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: `Contact ${site.name}: Enquire on WhatsApp`,
-  description: `Enquire about gold and silver décor pieces on WhatsApp at ${site.phone}. Each enquiry opens WhatsApp with your message filled in.`,
+  description: "Enquire about gold and silver décor pieces on WhatsApp. Each enquiry opens WhatsApp with your message filled in.",
   path: "/contact",
   keywords: ["contact Indian Invention Boy", "gold decor enquiry WhatsApp"],
 });
@@ -21,7 +22,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Contact"
         title="Send us an enquiry"
-        description="Tell us which piece you are interested in. Your enquiry opens in WhatsApp, and we reply there."
+        description="Tell us which piece you are interested in. Your enquiry opens in WhatsApp with your message filled in."
         crumbs={[{ label: "Home", href: "/" }, { label: "Contact" }]}
       />
 
@@ -30,20 +31,13 @@ export default function ContactPage() {
           <div className="grid gap-[clamp(2rem,4vw,3.5rem)] lg:grid-cols-[1fr_1.35fr]">
             <div className="flex flex-col gap-4">
               <div className="rounded-card border border-line-soft bg-white p-[clamp(1.125rem,2.2vw,1.5rem)] shadow-soft">
-                <span className="grid size-11 place-items-center rounded-full bg-[#25d366] text-white">
-                  <WhatsAppIcon className="size-[1.2rem]" />
-                </span>
+                <WhatsAppIconLink tone="solid" />
                 <p className="mt-4 text-[0.6875rem] uppercase tracking-[0.14em] text-muted-soft">
                   WhatsApp enquiries
                 </p>
-                <a
-                  href={site.whatsappHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-1.5 block text-[0.9375rem] font-medium text-navy underline-offset-4 transition-colors duration-300 hover:underline"
-                >
-                  {site.phone}
-                </a>
+                <p className="mt-1.5 text-[0.9375rem] font-medium text-navy">
+                  Chat with us on WhatsApp
+                </p>
               </div>
 
               <div className="rounded-card border border-line-soft bg-white p-[clamp(1.125rem,2.2vw,1.5rem)] shadow-soft">

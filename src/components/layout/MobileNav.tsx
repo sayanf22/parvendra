@@ -7,9 +7,10 @@ import type { CSSProperties } from "react";
 
 const noopSubscribe = () => () => {};
 import { cn } from "@/lib/cn";
-import { navLinks, site } from "@/lib/site";
+import { navLinks } from "@/lib/site";
 import { ButtonLink } from "@/components/ui/Button";
-import { ArrowRightIcon, WhatsAppIcon } from "@/components/icons";
+import { WhatsAppIconLink } from "@/components/ui/WhatsApp";
+import { ArrowRightIcon } from "@/components/icons";
 
 export function MobileNav({ pathname }: { pathname: string }) {
   /**
@@ -171,22 +172,10 @@ export function MobileNav({ pathname }: { pathname: string }) {
           Request a Quote
         </ButtonLink>
 
-        <dl className="mt-7 grid gap-3 text-[0.8125rem]">
-          <div className="flex items-center gap-3">
-            <dt className="sr-only">WhatsApp enquiries</dt>
-            <WhatsAppIcon className="size-4 shrink-0 text-blue" />
-            <dd>
-              <a
-                href={site.whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted transition-colors duration-300 hover:text-navy"
-              >
-                {site.phone}
-              </a>
-            </dd>
-          </div>
-        </dl>
+        <div className="mt-7 flex items-center gap-3">
+          <WhatsAppIconLink tone="solid" />
+          <p className="text-[0.8125rem] text-muted">Enquiries open in WhatsApp</p>
+        </div>
       </div>
     </div>
   );

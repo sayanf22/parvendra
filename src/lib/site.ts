@@ -14,10 +14,10 @@ export const site = {
   /** TODO: set to the live domain before launch. Used for canonical URLs and the sitemap. */
   url: "http://localhost:3000",
   /** Enquiry number, digits only with country code. */
-  whatsapp: "918108187667",
-  whatsappHref: "https://wa.me/918108187667",
-  /** Display form of the enquiry number. */
-  phone: "+91 81081 87667",
+  whatsapp: "916396639864",
+  whatsappHref: "https://wa.me/916396639864",
+  /** Machine-readable form (JSON-LD only). Never render it in the UI. */
+  phone: "+91 63966 39864",
   currency: "INR",
   currencySymbol: "₹",
   country: "IN",

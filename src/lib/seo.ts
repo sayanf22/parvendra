@@ -77,15 +77,12 @@ export function organizationSchema() {
     url: site.url,
     logo: `${site.url}/logo.webp`,
     telephone: site.phone,
-    areaServed: { "@type": "Country", name: "India" },
     contactPoint: [
       {
         "@type": "ContactPoint",
         contactType: "sales",
         telephone: site.phone,
         url: site.whatsappHref,
-        areaServed: "IN",
-        availableLanguage: ["English", "Hindi"],
       },
     ],
     sameAs: social.map((profile) => profile.href),

@@ -7,7 +7,8 @@ import { Reveal } from "@/components/ui/Reveal";
 import { ButtonLink } from "@/components/ui/Button";
 import { Eyebrow, SectionHeading } from "@/components/ui/SectionHeading";
 import { ProductCard } from "@/components/products/ProductCard";
-import { CheckIcon, ChevronRightIcon, WhatsAppIcon } from "@/components/icons";
+import { CheckIcon, ChevronRightIcon } from "@/components/icons";
+import { WhatsAppButton } from "@/components/ui/WhatsApp";
 import { products, relatedProducts } from "@/lib/products";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, canonical, pageMetadata, productSchema } from "@/lib/seo";
@@ -135,17 +136,15 @@ export default async function ProductPage({ params }: Params) {
                 </ul>
 
                 <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
-                  <a
+                  <WhatsAppButton
                     href={`${site.whatsappHref}?text=${encodeURIComponent(
                       `Hello ${site.name}, I would like to enquire about ${product.name} (catalogue no. ${product.ref}, ${product.priceLabel}).`
                     )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex h-[3.25rem] items-center justify-center gap-2.5 rounded-pill bg-[#25d366] px-6 text-[0.9375rem] font-semibold text-white shadow-[0_4px_16px_rgba(37,211,102,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#20bd5a]"
+                    tone="solid"
+                    size="lg"
                   >
-                    <WhatsAppIcon className="size-5" />
                     Enquire on WhatsApp
-                  </a>
+                  </WhatsAppButton>
                   <ButtonLink
                     href={`/request-a-quote?products=${encodeURIComponent(product.name)}#quote-form`}
                     variant="outline"

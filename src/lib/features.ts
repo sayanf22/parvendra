@@ -30,7 +30,7 @@ export const differenceFeatures: Feature[] = [
   {
     icon: WhatsAppIcon,
     title: "Enquire on WhatsApp",
-    body: "Ask about a piece, its availability or a bulk order in one message. Replies come directly on WhatsApp.",
+    body: "Ask about any piece in one message. Every enquiry opens in WhatsApp.",
     tone: "green",
   },
   {
@@ -67,7 +67,7 @@ export const commitments: Commitment[] = [
   {
     tag: "Vases & stands",
     title: "Vases and flower stands",
-    body: "A gold pedestal flower stand and a gold sunburst vase for fresh or dried arrangements.",
+    body: "A gold pedestal flower stand and a gold sunburst vase.",
     icon: GlobeIcon,
     tone: "green",
     size: "sm",
@@ -93,17 +93,17 @@ export const commitments: Commitment[] = [
   },
   {
     tag: "Enquiries",
-    title: "Reply on WhatsApp",
-    body: "Send the pieces you want and we answer on WhatsApp.",
+    title: "Enquire on WhatsApp",
+    body: "Send the pieces you are interested in as one WhatsApp message.",
     icon: WhatsAppIcon,
     tone: "green",
     size: "md",
     offset: 2,
   },
   {
-    tag: "Bulk",
-    title: "Quotes for larger orders",
-    body: "Tell us the pieces and quantities you need, and we will quote the order.",
+    tag: "Quotes",
+    title: "Request a quote",
+    body: "List the pieces and quantities you are interested in and send the request on WhatsApp.",
     icon: UsersIcon,
     tone: "berry",
     size: "sm",
@@ -145,8 +145,8 @@ export const proofPoints: Proof[] = [
     size: "sm",
   },
   {
-    title: "Quote for bulk orders",
-    note: "Tell us the pieces and quantities, and we will send a quote.",
+    title: "Request a quote",
+    note: "List the pieces and quantities, then send the request on WhatsApp.",
     href: "/request-a-quote",
     cta: "Request a quote",
     size: "lg",

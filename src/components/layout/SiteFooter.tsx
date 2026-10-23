@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/layout/Logo";
-import { PhoneIcon, WhatsAppIcon } from "@/components/icons";
+import { WhatsAppIconLink } from "@/components/ui/WhatsApp";
 import { navLinks, site } from "@/lib/site";
 import { categories } from "@/lib/products";
 
@@ -84,25 +84,12 @@ export function SiteFooter() {
             {/* Contact */}
             <div>
               <ColumnTitle>Enquire</ColumnTitle>
-              <ul className="mt-5 space-y-4">
-                <li className="flex gap-3">
-                  <WhatsAppIcon className="mt-[0.15rem] size-4 shrink-0 text-lime-soft" />
-                  <a
-                    href={site.whatsappHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[0.8125rem] leading-relaxed text-cream/60 transition-colors duration-300 hover:text-lime-soft"
-                  >
-                    WhatsApp {site.phone}
-                  </a>
-                </li>
-                <li className="flex gap-3">
-                  <PhoneIcon className="mt-[0.15rem] size-4 shrink-0 text-lime-soft" />
-                  <span className="text-[0.8125rem] leading-relaxed text-cream/60">
-                    Enquiries are answered on WhatsApp
-                  </span>
-                </li>
-              </ul>
+              <div className="mt-5 flex items-center gap-3">
+                <WhatsAppIconLink tone="onDark" />
+                <p className="text-[0.8125rem] leading-relaxed text-cream/60">
+                  Enquiries open in WhatsApp.
+                </p>
+              </div>
             </div>
           </div>
         </Container>

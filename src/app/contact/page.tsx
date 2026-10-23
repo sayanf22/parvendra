@@ -30,13 +30,16 @@ export default function ContactPage() {
         <Container>
           <div className="grid gap-[clamp(2rem,4vw,3.5rem)] lg:grid-cols-[1fr_1.35fr]">
             <div className="flex flex-col gap-4">
-              <div className="rounded-card border border-line-soft bg-white p-[clamp(1.125rem,2.2vw,1.5rem)] shadow-soft">
-                <WhatsAppIconLink tone="solid" />
-                <p className="mt-4 text-[0.6875rem] uppercase tracking-[0.14em] text-muted-soft">
+              <div className="rounded-panel bg-navy p-[clamp(1.25rem,2.5vw,1.75rem)] text-cream">
+                <WhatsAppIconLink tone="onDark" size="lg" />
+                <p className="mt-6 text-eyebrow font-semibold uppercase text-lime-soft">
                   WhatsApp enquiries
                 </p>
-                <p className="mt-1.5 text-[0.9375rem] font-medium text-navy">
+                <h2 className="mt-2 font-display text-[1.5rem] leading-tight text-cream">
                   Chat with us on WhatsApp
+                </h2>
+                <p className="mt-2.5 text-[0.875rem] leading-relaxed text-cream/70">
+                  Every enquiry on this site opens in WhatsApp.
                 </p>
               </div>
 

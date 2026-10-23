@@ -138,24 +138,32 @@ export default async function ProductPage({ params }: Params) {
                   ))}
                 </ul>
 
-                <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
-                  <WhatsAppButton
-                    href={`${site.whatsappHref}?text=${encodeURIComponent(
-                      `Hello ${site.name}, I would like to enquire about ${product.name} (catalogue no. ${product.ref}, ${product.priceLabel}).`
-                    )}`}
-                    tone="solid"
-                    size="lg"
-                  >
-                    Enquire on WhatsApp
-                  </WhatsAppButton>
-                  <ButtonLink
-                    href={`/request-a-quote?products=${encodeURIComponent(product.name)}#quote-form`}
-                    variant="outline"
-                    size="lg"
-                    withArrow
-                  >
-                    Request a Quote
-                  </ButtonLink>
+                <div className="mt-9 rounded-panel border border-line-soft bg-white/80 p-[clamp(1rem,2.5vw,1.5rem)] shadow-soft backdrop-blur-sm">
+                  <h2 className="font-sans text-[1rem] font-semibold leading-snug text-navy">
+                    Enquire about this piece
+                  </h2>
+                  <p className="mt-1 text-[0.8125rem] text-muted">
+                    Opens WhatsApp with the name, catalogue no. and price filled in.
+                  </p>
+                  <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center">
+                    <WhatsAppButton
+                      href={`${site.whatsappHref}?text=${encodeURIComponent(
+                        `Hello ${site.name}, I would like to enquire about ${product.name} (catalogue no. ${product.ref}, ${product.priceLabel}).`
+                      )}`}
+                      tone="solid"
+                      size="lg"
+                    >
+                      Enquire on WhatsApp
+                    </WhatsAppButton>
+                    <ButtonLink
+                      href={`/request-a-quote?products=${encodeURIComponent(product.name)}#quote-form`}
+                      variant="outline"
+                      size="lg"
+                      withArrow
+                    >
+                      Request a Quote
+                    </ButtonLink>
+                  </div>
                 </div>
               </div>
             </div>

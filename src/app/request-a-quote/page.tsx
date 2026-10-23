@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/layout/PageHero";
 import { QuoteForm } from "@/components/forms/QuoteForm";
-import { CheckIcon } from "@/components/icons";
 import { WhatsAppIconLink } from "@/components/ui/WhatsApp";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
@@ -44,14 +43,19 @@ export default function RequestQuotePage() {
                 <h2 className="font-sans text-[1.0625rem] font-semibold leading-snug text-navy">
                   What happens next
                 </h2>
-                <ul className="mt-4 space-y-3">
-                  {steps.map((line) => (
-                    <li key={line} className="flex gap-3 text-muted">
-                      <CheckIcon className="mt-0.5 size-5 shrink-0 rounded-full bg-lime-soft p-1 text-navy" />
-                      {line}
+                <ol className="mt-4 space-y-3">
+                  {steps.map((line, index) => (
+                    <li key={line} className="flex items-start gap-3 text-muted">
+                      <span
+                        aria-hidden
+                        className="grid size-7 shrink-0 place-items-center rounded-full bg-navy text-[0.75rem] font-semibold text-cream"
+                      >
+                        {index + 1}
+                      </span>
+                      <span className="pt-0.5">{line}</span>
                     </li>
                   ))}
-                </ul>
+                </ol>
               </div>
 
               <div className="rounded-panel border border-line-soft bg-white p-[clamp(1.25rem,2.5vw,1.75rem)] shadow-soft">

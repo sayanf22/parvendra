@@ -19,7 +19,7 @@ export function QuoteCta() {
       className="pb-[clamp(3rem,7vw,5.5rem)]"
     >
       <Container>
-        <Reveal className="relative isolate overflow-hidden rounded-panel bg-lime-mist px-[clamp(1.25rem,4vw,3.5rem)] py-[clamp(2.5rem,6vw,4rem)]">
+        <Reveal className="relative isolate overflow-hidden rounded-panel border border-line-soft bg-lime-mist px-[clamp(1.25rem,4vw,3.5rem)] py-[clamp(2.5rem,6vw,4rem)]">
           <div
             aria-hidden
             className="absolute inset-0 -z-10"
@@ -68,6 +68,10 @@ export function QuoteCta() {
 
               <WhatsAppIconLink tone="outline" size="lg" />
             </div>
+
+            <p className="mt-4 text-[0.75rem] text-muted">
+              Opens in WhatsApp. Nothing is sent until you press send.
+            </p>
           </div>
         </Reveal>
       </Container>

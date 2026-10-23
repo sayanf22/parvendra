@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { PageHero } from "@/components/layout/PageHero";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PriceTag } from "@/components/products/PriceTag";
 import { QuoteCta } from "@/components/home/QuoteCta";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
@@ -68,9 +69,12 @@ export default function AboutPage() {
                       </p>
                       <ul className="mt-4 space-y-2.5">
                         {items.map((item) => (
-                          <li key={item.slug} className="flex justify-between gap-4 text-[0.9375rem] text-muted">
+                          <li
+                            key={item.slug}
+                            className="flex items-center justify-between gap-4 border-b border-line-soft pb-2.5 text-[0.9375rem] text-muted last:border-0 last:pb-0"
+                          >
                             <span>{item.name}</span>
-                            <span className="shrink-0 font-medium text-navy">{item.priceLabel}</span>
+                            <PriceTag price={item.priceLabel} size="sm" tone="soft" className="shrink-0" />
                           </li>
                         ))}
                       </ul>

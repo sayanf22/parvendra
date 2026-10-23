@@ -7,6 +7,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { ButtonLink } from "@/components/ui/Button";
 import { Eyebrow, SectionHeading } from "@/components/ui/SectionHeading";
 import { ProductCard } from "@/components/products/ProductCard";
+import { PriceTag } from "@/components/products/PriceTag";
 import { CheckIcon, ChevronRightIcon } from "@/components/icons";
 import { WhatsAppButton } from "@/components/ui/WhatsApp";
 import { products, relatedProducts } from "@/lib/products";
@@ -105,9 +106,7 @@ export default async function ProductPage({ params }: Params) {
               <div>
                 <Eyebrow>{product.categoryLabel}</Eyebrow>
                 <h1 className="mt-4 text-h1">{product.name}</h1>
-                <p className="mt-4 font-display text-[clamp(1.5rem,1.2rem+1vw,2.125rem)] text-navy">
-                  {product.priceLabel}
-                </p>
+                <PriceTag price={product.priceLabel} size="lg" className="mt-5" />
                 <p className="text-lead mt-4 max-w-[46ch] text-muted">{product.blurb}</p>
 
                 <dl className="mt-8 grid max-w-xl grid-cols-2 gap-3 sm:grid-cols-4">
@@ -120,7 +119,11 @@ export default async function ProductPage({ params }: Params) {
                         {spec.label}
                       </dt>
                       <dd className="mt-1.5 text-[0.875rem] font-medium text-navy">
-                        {spec.value}
+                        {spec.label === "Price" ? (
+                          <PriceTag price={spec.value} size="sm" tone="soft" />
+                        ) : (
+                          spec.value
+                        )}
                       </dd>
                     </div>
                   ))}

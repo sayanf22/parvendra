@@ -14,6 +14,7 @@ import {
 import { cn } from "@/lib/cn";
 import { search } from "@/lib/search";
 import { ArrowRightIcon, CloseIcon, SearchIcon } from "@/components/icons";
+import { PriceTag } from "@/components/products/PriceTag";
 
 const noopSubscribe = () => () => {};
 
@@ -211,6 +212,9 @@ export function SiteSearch() {
                       {result.description}
                     </span>
                   </span>
+                  {result.price && (
+                    <PriceTag price={result.price} size="xs" tone="dark" className="shrink-0" />
+                  )}
                   <span className="shrink-0 rounded-pill bg-surface px-2 py-0.5 text-[0.625rem] font-semibold uppercase tracking-[0.1em] text-muted-soft">
                     {result.group}
                   </span>

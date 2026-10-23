@@ -9,6 +9,8 @@ export type SearchResult = {
   group: "Page" | "Product" | "Category";
   /** Product image path for thumbnail display. */
   image?: string;
+  /** Display price for product results, for example "₹2,500". */
+  price?: string;
 };
 
 const PAGES: SearchResult[] = navLinks
@@ -39,9 +41,10 @@ const CATEGORY_RESULTS: SearchResult[] = categories
 
 const PRODUCT_RESULTS: SearchResult[] = products.map((product) => ({
   title: product.name,
-  description: `${product.categoryLabel} · ${product.finish} · ${product.priceLabel}`,
+  description: `${product.categoryLabel} · ${product.finish}`,
   href: `/products/${product.slug}`,
   image: product.image,
+  price: product.priceLabel,
   group: "Product" as const,
 }));
 
@@ -76,7 +79,7 @@ function tokenise(value: string) {
 const ENTRIES = INDEX.map((item, order) => {
   const product = products.find((p) => `/products/${p.slug}` === item.href);
   const bodyTokens = tokenise(
-    `${item.title} ${item.description} ${product?.blurb ?? ""}`
+    `${item.title} ${item.description} ${item.price ?? ""} ${product?.blurb ?? ""}`
   );
   return {
     item,

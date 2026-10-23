@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/cn";
 import { ArrowRightIcon } from "@/components/icons";
+import { PriceTag } from "@/components/products/PriceTag";
 import type { Product } from "@/lib/products";
 
 export function ProductCard({
@@ -42,9 +43,12 @@ export function ProductCard({
             className="object-cover object-center transition-transform duration-[900ms] ease-[var(--ease-out-soft)] group-hover:scale-[1.05] group-focus-within:scale-[1.05]"
           />
 
-          <span className="absolute right-2 top-2 z-2 rounded-pill border border-navy/10 bg-white/90 px-2.5 py-0.5 text-[0.6875rem] font-semibold text-navy shadow-soft backdrop-blur-sm sm:right-2.5 sm:top-2.5 sm:text-[0.75rem]">
-            {product.priceLabel}
-          </span>
+          <PriceTag
+            price={product.priceLabel}
+            size="sm"
+            tone="dark"
+            className="absolute right-2 top-2 z-2 sm:right-3 sm:top-3"
+          />
         </div>
 
         {/* The accent line draws in for pointer and keyboard interaction. */}

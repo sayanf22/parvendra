@@ -731,7 +731,7 @@
   transform: none;
 }
 
-/* How-to-order connector: draws left to right once the row is visible. */
+/* Drawn rule (trust panel price range): grows in once its Reveal is visible. */
 .order-line {
   transform: scaleX(0);
   transform-origin: 0 50%;

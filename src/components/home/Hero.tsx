@@ -4,7 +4,7 @@ import type { CSSProperties, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 import { Container } from "@/components/ui/Container";
 import { ArrowRightIcon, WhatsAppIcon } from "@/components/icons";
-import { categories, products } from "@/lib/products";
+import { collections, products } from "@/lib/products";
 import { site } from "@/lib/site";
 
 /**
@@ -23,12 +23,6 @@ const main = bySlug("golden-deer-figurine");
 const inset = bySlug("gold-pedestal-flower-stand");
 const thumb = bySlug("golden-sitting-rabbit-figurine");
 
-const collections = categories
-  .filter((c) => c.id !== "all")
-  .map((c) => ({
-    ...c,
-    count: products.filter((p) => p.category === c.id).length,
-  }));
 
 /** One headline word, revealed by sliding up out of a clipping mask. */
 function Word({ children, delay }: { children: ReactNode; delay: number }) {
@@ -121,7 +115,7 @@ export function Hero() {
                   </Link>
                   <span aria-hidden className="hero-rule-y h-14 w-px shrink-0 bg-navy/25" style={at(950)} />
                   <p className="max-w-[26ch] text-[0.9375rem] leading-relaxed text-ink sm:text-[1rem]">
-                    Figurines, vases and serving trays in gold and silver finishes.
+                    Décor pieces in warm gold and bright silver finishes.
                   </p>
                 </div>
               </Fade>
@@ -179,8 +173,8 @@ export function Hero() {
             <div className="grid gap-9 pb-[clamp(2.5rem,6vw,4rem)] sm:grid-cols-2 lg:flex lg:flex-col lg:gap-0 lg:pb-14 lg:pl-7 lg:pt-[clamp(3rem,7vw,5.5rem)]">
               <Fade delay={680} className="lg:pb-8">
                 <p className="max-w-[30ch] text-[0.9375rem] leading-relaxed text-ink">
-                  {products.length} pieces across {collections.length} collections,
-                  each with its own catalogue number and product page.
+                  Golden figurines, a sunburst vase, a pedestal flower stand
+                  and silver serving trays.
                 </p>
                 <Link
                   href="/products"
@@ -199,15 +193,13 @@ export function Hero() {
                   {collections.map((c) => (
                     <li key={c.id}>
                       <Link
-                        href={`/products?category=${c.id}#range`}
-                        className="group flex items-center justify-between gap-4 border-b border-line py-2.5 text-[0.9375rem] text-navy transition-colors duration-300 hover:text-blue"
+                        href={`/collections#${c.id}`}
+                        className="group flex min-h-11 items-center justify-between gap-4 border-b border-line py-2.5 text-[0.9375rem] font-medium text-navy transition-colors duration-300 hover:text-blue"
                       >
                         <span className="transition-transform duration-300 ease-[var(--ease-out-soft)] group-hover:translate-x-1">
                           {c.label}
                         </span>
-                        <span className="font-display text-[1.125rem] tabular-nums text-blue">
-                          {String(c.count).padStart(2, "0")}
-                        </span>
+                        <ArrowRightIcon className="size-4 -rotate-45 text-blue transition-transform duration-300 group-hover:rotate-0" />
                       </Link>
                     </li>
                   ))}

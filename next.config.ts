@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
   compress: true,
   // Keeps the dev overlay badge from sitting on top of the hero CTA.
   devIndicators: false,
+  // The old Why Us page was replaced by Collections; keep old links working.
+  async redirects() {
+    return [{ source: "/why-us", destination: "/collections", permanent: true }];
+  },
 };
 
 export default nextConfig;

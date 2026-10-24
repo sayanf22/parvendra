@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/home/Hero";
 import { ClientStrip } from "@/components/home/ClientStrip";
 import { ProductRange } from "@/components/home/ProductRange";
-import { Difference } from "@/components/home/Difference";
+import { HowToOrder } from "@/components/home/HowToOrder";
 import { QuoteCta } from "@/components/home/QuoteCta";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
@@ -26,7 +26,7 @@ export default function HomePage() {
       <Hero />
       <ClientStrip />
       <ProductRange />
-      <Difference />
+      <HowToOrder />
       <QuoteCta />
 
       <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }])} />

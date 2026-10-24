@@ -19,9 +19,9 @@ const PAGES: SearchResult[] = navLinks
     title: link.label,
     description:
       link.href === "/products"
-        ? `Browse ${products.length} gold and silver pieces, each with its price.`
-        : link.href === "/why-us"
-          ? "Clear prices, catalogue numbers and simple WhatsApp enquiries."
+        ? "Browse the gold and silver pieces, each with its price."
+        : link.href === "/collections"
+          ? "Figurines, vases and stands, and serving trays."
           : link.href === "/about"
             ? `About ${site.name} and how to order.`
             : "Enquire about a piece on WhatsApp.",

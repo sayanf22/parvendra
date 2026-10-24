@@ -24,7 +24,7 @@ npm run lint
 | Brand name, tagline, WhatsApp enquiry number, site URL | `src/lib/site.ts` |
 | Products, prices, catalogue numbers, photos | `src/lib/products.ts`, `public/products/` |
 | Home page highlight band | `marqueeItems` in `src/lib/site.ts` |
-| Why Us cards and highlights | `src/lib/features.ts` |
+| Collections page sections | `collections` in `src/lib/products.ts` |
 | FAQ answers | `src/components/seo/FaqSection.tsx` |
 | Page metadata and structured data | `src/lib/seo.ts` |
 | WhatsApp message builder | `src/lib/enquiry.ts` |

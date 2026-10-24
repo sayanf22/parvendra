@@ -14,8 +14,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
     },
     {
-      path: "/why-us",
-      priority: 0.75,
+      path: "/collections",
+      priority: 0.85,
       changeFrequency: "monthly" as const,
     },
     { path: "/about", priority: 0.7, changeFrequency: "monthly" as const },

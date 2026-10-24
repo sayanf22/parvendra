@@ -11,7 +11,7 @@
 
 ## Key Pages
 - [Products](/products): All six pieces with prices, filterable by collection
-- [Why Us](/why-us): Clear prices, catalogue numbers and simple enquiries
+- [Collections](/collections): Figurines, Vases & Stands, and Serving Trays
 - [About Us](/about): The collection and how to order
 - [Contact](/contact): Enquire on WhatsApp
 - [Request a Quote](/request-a-quote): List the pieces and quantities you need

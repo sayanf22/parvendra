@@ -13,17 +13,17 @@ export function Eyebrow({
 }) {
   const tones = {
     green:
-      "inline-flex items-center gap-2 text-navy before:size-2 before:shrink-0 before:rounded-full before:bg-lime-soft",
+      "inline-flex items-center gap-2 text-navy before:size-1.5 before:shrink-0 before:rounded-full before:bg-blue",
     blue: "text-blue",
-    /** Exact accent remains highly visible against the near-black slab. */
-    mint: "text-lime-soft",
-    light: "text-white/65",
+    /** Light accent stays clearly visible against the near-black slab. */
+    mint: "inline-flex items-center gap-2 text-lime-soft before:size-1.5 before:shrink-0 before:rounded-full before:bg-lime-soft",
+    light: "text-white/80",
   } as const;
 
   return (
     <p
       className={cn(
-        "text-eyebrow font-medium uppercase",
+        "text-[0.75rem] font-semibold uppercase leading-[1.4] tracking-[0.16em] sm:text-[0.8125rem]",
         tones[tone],
         className
       )}

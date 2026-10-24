@@ -147,6 +147,32 @@ function define({ slug, ref, name, category, price, priceLabel, finish }: Seed):
 
 export const products: Product[] = seeds.map(define);
 
+/**
+ * One entry per collection, for the Collections page and home sections.
+ * Each summary only names the pieces and finishes in that collection.
+ */
+export type Collection = {
+  id: ProductCategory;
+  label: string;
+  summary: string;
+  items: Product[];
+};
+
+const COLLECTION_SUMMARY: Record<ProductCategory, string> = {
+  figurines: "Golden animal figurines: a leopard, a sitting rabbit and a deer.",
+  "vases-stands": "A gold pedestal flower stand and a gold sunburst vase.",
+  serveware: "Silver serving trays with a chevron pattern.",
+};
+
+export const collections: Collection[] = categories
+  .filter((c): c is CategoryInfo & { id: ProductCategory } => c.id !== "all")
+  .map((c) => ({
+    id: c.id,
+    label: c.label,
+    summary: COLLECTION_SUMMARY[c.id],
+    items: products.filter((p) => p.category === c.id),
+  }));
+
 /** Same-collection pieces first, then the rest of the catalogue. */
 export function relatedProducts(product: Product, count = 4): Product[] {
   const others = products.filter((item) => item.slug !== product.slug);

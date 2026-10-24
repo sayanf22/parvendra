@@ -4,14 +4,14 @@ import { Logo } from "@/components/layout/Logo";
 import { WhatsAppButton } from "@/components/ui/WhatsApp";
 import { ArrowRightIcon } from "@/components/icons";
 import { navLinks, site } from "@/lib/site";
-import { categories, products } from "@/lib/products";
+import { collections } from "@/lib/products";
 
 /** Column heading, the same quiet sans treatment in every column. */
 function ColumnTitle({ children, id }: { children: React.ReactNode; id?: string }) {
   return (
     <h2
       id={id}
-      className="font-sans text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-cream/45"
+      className="font-sans text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-cream/65"
     >
       {children}
     </h2>
@@ -22,7 +22,7 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
   return (
     <Link
       href={href}
-      className="group inline-flex items-center gap-2 py-1.5 text-[0.9375rem] text-cream/75 transition-colors duration-300 hover:text-cream"
+      className="group inline-flex items-center gap-2 py-1.5 text-[0.9375rem] text-cream/85 transition-colors duration-300 hover:text-cream"
     >
       <span className="relative">
         {children}
@@ -36,13 +36,10 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
 }
 
 export function SiteFooter() {
-  const collectionLinks = categories
-    .filter((category) => category.id !== "all")
-    .map((category) => ({
-      label: category.label,
-      href: `/products?category=${category.id}#range`,
-      count: products.filter((p) => p.category === category.id).length,
-    }));
+  const collectionLinks = collections.map((c) => ({
+    label: c.label,
+    href: `/collections#${c.id}`,
+  }));
 
   const pageLinks = [...navLinks, { label: "Request a Quote", href: "/request-a-quote" }];
 
@@ -68,7 +65,7 @@ export function SiteFooter() {
                 <p className="font-display text-[clamp(1.5rem,1.1rem+1.6vw,2.5rem)] leading-[1.1] text-cream">
                   {site.name}
                 </p>
-                <p className="mt-1.5 text-[0.9375rem] text-cream/60">{site.tagline}</p>
+                <p className="mt-1.5 text-[0.9375rem] text-cream/75">{site.tagline}</p>
               </div>
             </div>
 
@@ -76,7 +73,7 @@ export function SiteFooter() {
               <WhatsAppButton tone="onDark" size="lg">
                 Enquire on WhatsApp
               </WhatsAppButton>
-              <p className="text-[0.8125rem] text-cream/50">
+              <p className="text-[0.8125rem] text-cream/70">
                 Opens WhatsApp. Nothing is sent until you press send.
               </p>
             </div>
@@ -86,10 +83,9 @@ export function SiteFooter() {
           <div className="grid gap-10 py-[clamp(2.25rem,4.5vw,3.5rem)] sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
             <div className="max-w-[34ch]">
               <ColumnTitle>About</ColumnTitle>
-              <p className="mt-4 text-[0.9375rem] leading-relaxed text-cream/70">
-                {products.length} gold and silver pieces across{" "}
-                {collectionLinks.length} collections, each listed with its price in
-                Indian Rupees.
+              <p className="mt-4 text-[0.9375rem] leading-relaxed text-cream/80">
+                Gold and silver décor pieces: figurines, vases, flower stands and
+                serving trays, each listed with its price in Indian Rupees.
               </p>
               <Link
                 href="/products"
@@ -115,11 +111,8 @@ export function SiteFooter() {
               <ColumnTitle id="footer-collections">Collections</ColumnTitle>
               <ul className="mt-4">
                 {collectionLinks.map((item) => (
-                  <li key={item.href} className="flex items-center gap-3">
+                  <li key={item.href}>
                     <FooterLink href={item.href}>{item.label}</FooterLink>
-                    <span className="text-[0.75rem] tabular-nums text-cream/35">
-                      {String(item.count).padStart(2, "0")}
-                    </span>
                   </li>
                 ))}
               </ul>
@@ -130,19 +123,27 @@ export function SiteFooter() {
         {/* ── Oversized wordmark ──────────────────────────────────────── */}
         <p
           aria-hidden
-          className="pointer-events-none select-none whitespace-nowrap px-[clamp(1rem,3vw,2.5rem)] text-center font-display text-[clamp(2.25rem,8.2vw,9.5rem)] leading-[0.85] tracking-[-0.03em] text-cream/[0.07]"
+          className="pointer-events-none select-none whitespace-nowrap px-[clamp(1rem,3vw,2.5rem)] text-center font-display text-[clamp(2.25rem,8.2vw,9.5rem)] leading-[1] pb-[0.12em] tracking-[-0.03em] text-cream/[0.1]"
         >
           {site.name}
         </p>
 
         {/* ── Bottom bar ──────────────────────────────────────────────── */}
         <Container>
-          <div className="flex flex-col items-center justify-between gap-2 border-t border-white/10 py-6 text-center sm:flex-row sm:text-left">
-            <p className="text-[0.8125rem] text-cream/50">
+          <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 py-6 text-center sm:flex-row sm:text-left">
+            <p className="text-[0.875rem] text-cream/70">
               © {new Date().getFullYear()} {site.name}. All rights reserved.
             </p>
-            <p className="text-[0.8125rem] text-cream/50">
-              Made by <span className="font-semibold text-cream">Whycreatives</span>
+            <p className="text-[0.875rem] text-cream/70">
+              Made by{" "}
+              <a
+                href="https://whycreatives.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-cream underline decoration-cream/30 underline-offset-4 transition-colors duration-300 hover:decoration-cream"
+              >
+                whycreatives.in
+              </a>
             </p>
           </div>
         </Container>

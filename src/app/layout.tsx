@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, DM_Serif_Display, Mrs_Saint_Delafield } from "next/font/google";
+import { DM_Sans, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -21,15 +21,8 @@ const dmSans = DM_Sans({
 const dmSerif = DM_Serif_Display({
   variable: "--font-dm-serif",
   weight: "400",
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-  display: "swap",
-});
-
-/** Thin script, used only for short decorative accents such as the hero eyebrow. */
-const script = Mrs_Saint_Delafield({
-  variable: "--font-script-face",
-  weight: "400",
+  /* Upright only. The site uses no italic or script type anywhere. */
+  style: ["normal"],
   subsets: ["latin"],
   display: "swap",
 });
@@ -102,7 +95,7 @@ export default function RootLayout({
       lang="en-IN"
       /* Tells Next the smooth scroll is intentional, silencing its warning. */
       data-scroll-behavior="smooth"
-      className={`${dmSans.variable} ${dmSerif.variable} ${script.variable} h-full antialiased`}
+      className={`${dmSans.variable} ${dmSerif.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-white">
         {/* Entity graph, once for the whole site. */}

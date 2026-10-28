@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/cn";
 import { ArrowRightIcon } from "@/components/icons";
 import { PriceTag } from "@/components/products/PriceTag";
+import { ProductPhoto } from "@/components/products/ProductPhoto";
 import type { Product } from "@/lib/products";
 
 export function ProductCard({
@@ -30,17 +30,16 @@ export function ProductCard({
         {/* ── Product photo ─────────────────────────────────────────── */}
         <div
           className={cn(
-            "relative aspect-square overflow-hidden",
+            "relative aspect-[3/4] overflow-hidden",
             product.tint
           )}
         >
-          <Image
+          <ProductPhoto
             src={product.image}
             alt={product.imageAlt}
-            fill
             priority={priority}
             sizes={sizes}
-            className="object-cover object-center transition-transform duration-[900ms] ease-[var(--ease-out-soft)] group-hover:scale-[1.05] group-focus-within:scale-[1.05]"
+            className="transition-transform duration-[900ms] ease-[var(--ease-out-soft)] group-hover:scale-[1.04] group-focus-within:scale-[1.04]"
           />
 
           <PriceTag

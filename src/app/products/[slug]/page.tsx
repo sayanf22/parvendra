@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
@@ -8,6 +7,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { Eyebrow, SectionHeading } from "@/components/ui/SectionHeading";
 import { ProductCard } from "@/components/products/ProductCard";
 import { PriceTag } from "@/components/products/PriceTag";
+import { ProductPhoto } from "@/components/products/ProductPhoto";
 import { CheckIcon, ChevronRightIcon } from "@/components/icons";
 import { WhatsAppButton } from "@/components/ui/WhatsApp";
 import { products, relatedProducts } from "@/lib/products";
@@ -91,15 +91,13 @@ export default async function ProductPage({ params }: Params) {
 
             <div className="grid items-center gap-[clamp(2rem,5vw,4rem)] lg:grid-cols-2">
               <div
-                className={`relative order-first aspect-square max-h-[32rem] w-full overflow-hidden rounded-hero lg:order-last ${product.tint}`}
+                className={`relative order-first mx-auto aspect-[3/4] w-full max-w-[28rem] overflow-hidden rounded-hero lg:order-last ${product.tint}`}
               >
-                <Image
+                <ProductPhoto
                   src={product.image}
                   alt={product.imageAlt}
-                  fill
                   priority
-                  sizes="(min-width: 1024px) 42vw, 92vw"
-                  className="object-cover"
+                  sizes="(min-width: 1024px) 28rem, 92vw"
                 />
               </div>
 

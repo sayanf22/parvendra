@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { ProductPhoto } from "@/components/products/ProductPhoto";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { ButtonLink } from "@/components/ui/Button";
@@ -91,12 +91,10 @@ export function QuoteCta() {
                       className="float-gentle relative aspect-[3/4] overflow-hidden rounded-[1.25rem] border-[5px] border-cream-soft bg-cream-soft shadow-lift"
                       style={{ animationDelay: `${i * 1.2}s` }}
                     >
-                      <Image
+                      <ProductPhoto
                         src={p.image}
                         alt=""
-                        fill
                         sizes="(min-width: 1024px) 16rem, 44vw"
-                        className="object-cover"
                       />
                     </div>
                   </Reveal>

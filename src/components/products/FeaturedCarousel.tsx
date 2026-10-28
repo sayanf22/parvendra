@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import {
   useCallback,
@@ -12,6 +11,7 @@ import {
 import { cn } from "@/lib/cn";
 import { ArrowRightIcon } from "@/components/icons";
 import { PriceTag } from "@/components/products/PriceTag";
+import { ProductPhoto } from "@/components/products/ProductPhoto";
 import type { Product } from "@/lib/products";
 
 const INTERVAL_MS = 3200;
@@ -195,17 +195,15 @@ export function FeaturedCarousel({ products }: { products: Product[] }) {
                 >
                   {/* Wipes open when the carousel scrolls into view; first three stagger. */}
                   <div
-                    className="reveal-media relative aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-lime-soft shadow-soft group-hover:shadow-lift"
+                    className="reveal-media relative aspect-[3/4] overflow-hidden rounded-[1.5rem] bg-lime-soft shadow-soft group-hover:shadow-lift"
                     style={{ "--d": `${Math.min(i, 3) * 140}ms` } as React.CSSProperties}
                   >
-                    <span className="reveal-media-img absolute inset-0 block">
-                      <Image
+                    <span className="reveal-media-img pointer-events-none absolute inset-0 block select-none">
+                      <ProductPhoto
                         src={product.image}
                         alt={isCopy ? "" : product.imageAlt}
-                        fill
-                        draggable={false}
                         sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 84vw"
-                        className="object-cover transition-transform duration-[1200ms] ease-[var(--ease-out-soft)] group-hover:scale-[1.06]"
+                        className="transition-transform duration-[1200ms] ease-[var(--ease-out-soft)] group-hover:scale-[1.04]"
                       />
                     </span>
 

@@ -7,6 +7,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { PageHero } from "@/components/layout/PageHero";
 import { ArrowRightIcon } from "@/components/icons";
 import { PriceTag } from "@/components/products/PriceTag";
+import { ProductPhoto } from "@/components/products/ProductPhoto";
 import { WhatsAppButton } from "@/components/ui/WhatsApp";
 import { QuoteCta } from "@/components/home/QuoteCta";
 import { FaqSection, supplyFaqs } from "@/components/seo/FaqSection";
@@ -80,16 +81,15 @@ export default function CollectionsPage() {
                       <Link
                         href={`/products/${lead.slug}`}
                         aria-label={`View ${lead.name}`}
-                        className="group reveal-media relative block aspect-[4/5] overflow-hidden rounded-[1.75rem] bg-lime-soft shadow-card"
+                        className="group reveal-media relative block aspect-[3/4] overflow-hidden rounded-[1.75rem] bg-lime-soft shadow-card"
                       >
                         <span className="reveal-media-img absolute inset-0 block">
-                          <Image
+                          <ProductPhoto
                             src={lead.image}
                             alt={lead.imageAlt}
-                            fill
                             priority={ci === 0}
                             sizes="(min-width: 1024px) 40vw, 92vw"
-                            className="object-cover transition-transform duration-[1200ms] ease-[var(--ease-out-soft)] group-hover:scale-[1.05]"
+                            className="transition-transform duration-[1200ms] ease-[var(--ease-out-soft)] group-hover:scale-[1.04]"
                           />
                         </span>
                         <span className="absolute left-5 top-5 rounded-pill bg-cream-soft px-4 py-1.5 font-display text-[1rem] text-navy shadow-soft">
@@ -111,14 +111,13 @@ export default function CollectionsPage() {
                           <Link
                             href={`/products/${p.slug}`}
                             aria-label={`View ${p.name}`}
-                            className="group relative block aspect-square overflow-hidden rounded-[1.25rem] bg-lime-soft shadow-soft"
+                            className="group relative block aspect-[3/4] overflow-hidden rounded-[1.25rem] bg-lime-soft shadow-soft"
                           >
-                            <Image
+                            <ProductPhoto
                               src={p.image}
                               alt=""
-                              fill
                               sizes="(min-width: 1024px) 20vw, 46vw"
-                              className="object-cover transition-transform duration-700 ease-[var(--ease-out-soft)] group-hover:scale-[1.08]"
+                              className="transition-transform duration-700 ease-[var(--ease-out-soft)] group-hover:scale-[1.05]"
                             />
                           </Link>
                         </Reveal>

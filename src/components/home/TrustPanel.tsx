@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { ProductPhoto } from "@/components/products/ProductPhoto";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { ArrowRightIcon, CheckIcon, SparkleIcon, WhatsAppIcon } from "@/components/icons";
@@ -46,14 +46,13 @@ function Photo({
         className="group relative block"
         aria-label={`${product.name}, ${product.priceLabel}`}
       >
-        <span className="reveal-media relative block aspect-square overflow-hidden rounded-[1.5rem] bg-surface">
+        <span className="reveal-media relative block aspect-[3/4] overflow-hidden rounded-[1.5rem] bg-surface">
           <span className="reveal-media-img absolute inset-0 block">
-            <Image
+            <ProductPhoto
               src={product.image}
               alt={product.imageAlt}
-              fill
               sizes="(min-width: 1024px) 22vw, 45vw"
-              className="object-cover transition-transform duration-[1200ms] ease-[var(--ease-out-soft)] group-hover:scale-[1.05]"
+              className="transition-transform duration-[1200ms] ease-[var(--ease-out-soft)] group-hover:scale-[1.04]"
             />
           </span>
         </span>

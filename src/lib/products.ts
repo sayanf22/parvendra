@@ -222,6 +222,15 @@ const seeds: Seed[] = [
     priceLabel: "₹2,000",
     finish: "Gold",
   },
+  {
+    slug: "golden-monstera-leaf-stand",
+    ref: 19,
+    name: "Golden Monstera Leaf Stand",
+    category: "vases-stands",
+    price: 1500,
+    priceLabel: "₹1,500",
+    finish: "Gold",
+  },
 ];
 
 function define({ slug, ref, name, category, price, priceLabel, finish }: Seed): Product {
@@ -268,7 +277,7 @@ export type Collection = {
 
 const COLLECTION_SUMMARY: Record<ProductCategory, string> = {
   figurines: "Handcrafted golden figurines including leopards, sitting rabbits and deer.",
-  "vases-stands": "Pedestal flower stands, sunburst vases and wall art accents.",
+  "vases-stands": "Pedestal flower stands, sunburst vases, monstera holders and wall art accents.",
   serveware: "Fine silver and golden serving trays, leaf platters, dry fruit jars and dual snack bowls.",
 };
 

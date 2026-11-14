@@ -13,11 +13,17 @@ import { products, type Product } from "@/lib/products";
  */
 const ORDER = [
   "golden-leopard-figurine",
+  "golden-scalloped-serving-trays",
   "gold-sunburst-vase",
   "silver-chevron-serving-trays",
+  "golden-leaf-wall-art",
   "golden-deer-figurine",
+  "golden-apple-decorative-jar",
   "gold-pedestal-flower-stand",
+  "silver-leaf-serving-tray",
   "golden-sitting-rabbit-figurine",
+  "golden-twin-serving-bowl",
+  "golden-pineapple-decorative-jar",
 ];
 
 const ordered = ORDER.map((slug) => products.find((p) => p.slug === slug)).filter(

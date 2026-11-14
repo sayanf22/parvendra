@@ -29,6 +29,7 @@ cloudflare-env.d.ts
 # misc
 .DS_Store
 *.pem
+*.zip
 
 # debug
 npm-debug.log*

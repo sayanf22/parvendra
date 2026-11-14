@@ -200,6 +200,8 @@ export function SiteSearch() {
                         alt=""
                         fill
                         sizes="40px"
+                        loading="lazy"
+                        decoding="async"
                         className="object-cover"
                       />
                     </div>

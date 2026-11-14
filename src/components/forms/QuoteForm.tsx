@@ -176,7 +176,7 @@ export function QuoteForm() {
                     >
                       {matched && (
                         <span className={`relative size-8 shrink-0 overflow-hidden rounded-full ${matched.tint}`}>
-                          <Image src={matched.image} alt="" fill sizes="32px" className="object-cover" />
+                          <Image src={matched.image} alt="" fill sizes="32px" loading="lazy" decoding="async" className="object-cover" />
                         </span>
                       )}
                       <span className="min-w-0 truncate text-[0.8125rem] font-medium text-navy">
@@ -253,7 +253,7 @@ export function QuoteForm() {
                 >
                   <span className="flex min-w-0 items-center gap-3">
                     <span className={`relative size-10 shrink-0 overflow-hidden rounded-xl ${product.tint}`}>
-                      <Image src={product.image} alt="" fill sizes="40px" className="object-cover" />
+                      <Image src={product.image} alt="" fill sizes="40px" loading="lazy" decoding="async" className="object-cover" />
                     </span>
                     <span className="min-w-0">
                       <span className="block truncate text-[0.8125rem] font-medium text-navy">

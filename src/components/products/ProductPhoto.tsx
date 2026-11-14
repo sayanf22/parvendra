@@ -32,6 +32,8 @@ export function ProductPhoto({
         fill
         sizes={sizes}
         priority={priority}
+        loading={priority ? undefined : "lazy"}
+        decoding="async"
         className="scale-110 object-cover blur-2xl"
       />
       <Image
@@ -40,6 +42,8 @@ export function ProductPhoto({
         fill
         sizes={sizes}
         priority={priority}
+        loading={priority ? undefined : "lazy"}
+        decoding="async"
         className={cn("object-contain object-center", className)}
       />
     </>

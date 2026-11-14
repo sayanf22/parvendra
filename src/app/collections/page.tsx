@@ -106,7 +106,7 @@ export default function CollectionsPage() {
                         rest.length === 1 ? "grid-cols-1 sm:w-1/2" : "grid-cols-2"
                       )}
                     >
-                      {rest.map((p, i) => (
+                      {rest.slice(0, 2).map((p, i) => (
                         <Reveal key={p.slug} delay={120 + i * 120} className="reveal-zoom">
                           <Link
                             href={`/products/${p.slug}`}
@@ -151,7 +151,7 @@ export default function CollectionsPage() {
                           className="group flex items-center gap-4 border-b border-line py-4 transition-colors duration-300 hover:bg-cream-soft sm:gap-5 sm:px-2"
                         >
                           <span className="relative size-16 shrink-0 overflow-hidden rounded-[0.875rem] bg-lime-soft sm:size-[4.5rem]">
-                            <Image src={p.image} alt="" fill sizes="72px" className="object-cover" />
+                            <Image src={p.image} alt="" fill sizes="72px" loading="lazy" decoding="async" className="object-cover" />
                           </span>
                           <span className="min-w-0 flex-1">
                             <span className="block font-sans text-[1rem] font-semibold leading-snug text-navy transition-colors duration-300 group-hover:text-blue sm:text-[1.0625rem]">
